@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flashcards – School orders</title><style>:root{--c:#7b3fb3}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – School orders</h1><p>Anglais · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Comment dit-on en anglais : « Ouvre ton cahier d'exercices ! » ?", "r": "<b>Open your workbook!<\/b><br>L'ordre commence directement par le verbe <i>open<\/i> (ouvrir).", "notion": "ordres du professeur"}, {"q": "Comment dit-on en anglais : « Écoute ! » ?", "r": "<b>Listen!<\/b><br>Un seul mot : le verbe écouter.", "notion": "ordres du professeur"}, {"q": "Comment dit-on en anglais : « Apprends ta leçon ! » ?", "r": "<b>Learn your lesson!<\/b>", "notion": "ordres du professeur"}, {"q": "Que veut dire l'ordre « Be quiet! » ?", "r": "<b>Taisez-vous !<\/b> (silence !)<br>Cet ordre ne veut pas dire « soyez sages ». Pense à la petite souris : <i>quiet<\/i> = silencieux.", "notion": "Be quiet"}, {"q": "Que veut dire le mot « quiet » ?", "r": "<b>Silencieux.<\/b><br>Sur la fiche des adjectifs, il est écrit sous la petite souris, qui ne fait pas de bruit.", "notion": "Be quiet"}, {"q": "Comment dit-on en anglais : « Ne bavarde pas avec ton voisin ! » ?", "r": "<b>Don't chat with your neighbour!<\/b><br><i>Don't<\/i> se place devant le verbe pour interdire.", "notion": "interdiction Don't"}, {"q": "En français, on interdit avec « ne… pas » autour du verbe. Comment interdit-on en anglais ?", "r": "On met <b>Don't<\/b> devant le verbe, et rien après.<br>Exemple : <b>Don't chat!<\/b> = Ne bavarde pas !", "notion": "interdiction Don't"}, {"q": "Par quoi commence un ordre en anglais ?", "r": "Par <b>le verbe<\/b>, sans dire « you ».<br>Exemple : <b>Listen!<\/b> = Écoute !", "notion": "ordres du professeur"}, {"q": "À quoi sert le début de question « Can I…? » ?", "r": "À <b>demander la permission pour moi-même<\/b> : c'est moi qui vais faire l'action.<br>Exemple : <b>Can I close the window?<\/b> = Est-ce que je peux fermer la fenêtre ?", "notion": "Can I / Can you"}, {"q": "À quoi sert le début de question « Can you…? » ?", "r": "À <b>demander à quelqu'un d'autre<\/b> de faire l'action. Il ne sert pas à demander pour moi.<br>Exemple : <b>Can you repeat, please?<\/b> = Pouvez-vous répéter ?", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu en anglais : « Est-ce que je peux fermer la fenêtre ? » ?", "r": "<b>Can I close the window?<\/b><br>C'est moi qui ferme : donc <i>Can I<\/i>.", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu en anglais : « Est-ce que je peux aller à mon casier ? » ?", "r": "<b>Can I go to my locker?<\/b><br><i>locker<\/i> = casier.", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu au professeur : « Pouvez-vous répéter, s'il vous plaît ? » ?", "r": "<b>Can you repeat, please?<\/b><br>C'est le professeur qui répète : donc <i>Can you<\/i>.", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu au professeur : « Pouvez-vous parler lentement ? » ?", "r": "<b>Can you speak slowly?<\/b>", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu au professeur : « Pouvez-vous m'expliquer ? » ?", "r": "<b>Can you explain to me?<\/b>", "notion": "Can I / Can you"}, {"q": "Comment demandes-tu au professeur : « Pouvez-vous traduire ? » ?", "r": "<b>Can you translate?<\/b>", "notion": "Can I / Can you"}, {"q": "Comment dit-on en anglais : « Je ne comprends pas. » ?", "r": "<b>I don't understand.<\/b>", "notion": "parler au professeur"}, {"q": "Que veut dire « Can I go to the nurse? » ?", "r": "<b>Est-ce que je peux aller à l'infirmerie ?<\/b><br><i>the nurse<\/i> = l'infirmière (la porte avec la croix rouge). Ce n'est pas les toilettes !", "notion": "nurse / toilet"}, {"q": "Comment demandes-tu en anglais : « Est-ce que je peux aller aux toilettes ? » ?", "r": "<b>Can I go to the toilet?<\/b><br>Les toilettes, c'est <i>the toilet<\/i>. L'infirmerie, ce n'est pas <i>toilet<\/i> : c'est <i>the nurse<\/i>.", "notion": "nurse / toilet"}, {"q": "Que veut dire « Can you open the window? » ?", "r": "<b>Peux-tu ouvrir la fenêtre ?<\/b> (Pouvez-vous ouvrir la fenêtre ?)<br>C'est l'autre personne qui ouvre, pas moi.", "notion": "Can I / Can you"}], MATIERE = "Anglais", LECON = "School orders", CLE = 'elouan_cartes_' + "anglais-school-orders";
+
+const ENDPOINT = "", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: "elouan-6e-2026", lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // id -> {ecart, du}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = dues.slice(), faites = 0, total = file.length, bilan = {su:0, moitie:0, pas:0};
+document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+const zone = document.getElementById('zone');
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; etat[i] = e; sauver();
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro ?\')){localStorage.removeItem(CLE);location.reload()}">Remettre à zéro</button></div>';
+}
+montrer();
+</script></body></html>
