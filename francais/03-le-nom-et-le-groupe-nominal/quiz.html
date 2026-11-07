@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quiz – Le nom et le groupe nominal</title><style>:root{--c:#b3412f}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.choix button{display:block;width:100%;text-align:left;background:#eef;color:#222;border:2px solid #ccd}
+.choix button.choisi{border-color:var(--c);background:#dde}
+.jeton{display:inline-block;background:#eef;border:2px solid #ccd;border-radius:10px;padding:8px 12px;margin:4px;cursor:pointer}
+.jeton.pris{opacity:.3} #fin{text-align:center} .gros{font-size:3em;margin:0}
+</style></head><body>
+<header><h1>🧠 Quiz – Le nom et le groupe nominal</h1><p>Français · écris ta réponse, puis vérifie. Pas de stress : chaque erreur t'apprend quelque chose !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><div id="zone"></div></main>
+<script>
+const Q = [{"type": "court", "q": "Quel est le nom noyau du GN « la bonne idée du lion » ?", "reponses": ["idee", "idée", "l'idée", "l idee"], "explication": "On supprime tout ce qui peut l'être : <i>bonne<\/i> (adjectif) et <i>du lion<\/i> (complément du nom). Il reste <i>la idée<\/i> → le noyau est <b>idée<\/b>. On ne choisit pas <i>lion<\/i> : il fait partie d'une expansion.", "notion": "nom noyau"}, {"type": "court", "q": "Quel est le nom noyau du GN « un tas de graines appétissantes » ?", "reponses": ["tas", "un tas"], "explication": "On peut supprimer <i>appétissantes<\/i>, mais aussi <i>de graines<\/i> : il reste <i>un tas<\/i>. Le noyau est <b>tas<\/b>. Dans l'exercice, tu avais seulement supprimé <i>appétissantes<\/i>.", "notion": "nom noyau"}, {"type": "court", "q": "Quel est le nom noyau du GN « une histoire pleine de rebondissements » ?", "reponses": ["histoire", "une histoire"], "explication": "On supprime <i>pleine de rebondissements<\/i> : il reste <i>une histoire<\/i>. Le noyau est <b>histoire<\/b>.", "notion": "nom noyau"}, {"type": "court", "q": "Complète : un GN minimal est formé d'un … et d'un nom.", "reponses": ["determinant", "déterminant", "un determinant"], "explication": "Un GN minimal = <b>déterminant<\/b> + nom, par exemple <i>les fables<\/i>. S'il y a en plus une expansion, ce n'est plus un GN minimal : c'est un GN enrichi.", "notion": "GN minimal / enrichi"}, {"type": "court", "q": "Dans « les fables de La Fontaine », comment s'appelle l'expansion « de La Fontaine » ?", "reponses": ["complement du nom", "un complement du nom", "le complement du nom"], "explication": "<i>de La Fontaine<\/i> est un autre GN introduit par une préposition (<i>de<\/i>) : c'est un <b>complément du nom<\/b>. Ce n'est pas un adjectif : un adjectif est un seul mot comme <i>éducatives<\/i>.", "notion": "expansions du nom"}, {"type": "court", "q": "Recopie seulement le GN de cette phrase : « Dans la forêt sombre, il avance. »", "reponses": ["la foret sombre"], "explication": "Le GN est <b>la forêt sombre<\/b>. On ne met pas <i>Dans<\/i> : c'est une préposition, elle reste en dehors du GN. On ne met pas <i>il<\/i> : c'est un pronom.", "notion": "limites du GN"}, {"type": "court", "q": "Corrige l'erreur et écris le GN juste : « un jolie château ».", "reponses": ["un joli chateau"], "explication": "<i>Château<\/i> est masculin (on dit <i>un<\/i> château) : l'adjectif ne prend pas de -e. On écrit <b>un joli château<\/b>. On écrit <i>jolie<\/i> seulement avec un nom féminin : une jolie cabane.", "notion": "accord dans le GN"}, {"type": "court", "q": "Accorde les adjectifs : « Les (grand) arbres (vert) ». Écris le GN en entier.", "reponses": ["les grands arbres verts"], "explication": "Le noyau est <i>arbres<\/i>, au masculin pluriel. Les deux adjectifs prennent un -s : <b>les grands arbres verts<\/b>.", "notion": "accord dans le GN"}, {"type": "court", "q": "Mets au pluriel : « L'animal dévore l'anguille. »", "reponses": ["les animaux devorent les anguilles"], "explication": "<i>L'animal<\/i> devient <b>les animaux<\/b> (al → aux). Le verbe s'accorde avec le sujet au pluriel : <b>dévorent<\/b>. <i>L'anguille<\/i> devient <b>les anguilles<\/b>. Dans ton cahier, tu avais seulement recopié la phrase au singulier.", "notion": "accord dans le GN"}, {"type": "court", "q": "Trouve l'adjectif qui veut dire « qui fait peur » : « une araignée … »", "reponses": ["effrayante"], "explication": "Ce qui <b>fait<\/b> peur est <b>effrayant<\/b> ; au féminin, avec <i>une araignée<\/i>, on écrit <b>effrayante<\/b>. Ce qui <b>a<\/b> peur est <i>effrayé<\/i> : tu avais écrit « une souris effrayé », ce qui ne répond pas à la consigne et oublie le -e du féminin.", "notion": "vocabulaire"}, {"type": "qcm", "q": "Dans « Regarde, bientôt tout cela sera à toi ! », le mot « toi » est…", "choix": ["un GN", "un pronom", "un nom noyau"], "bonne": 1, "explication": "<i>Toi<\/i> est un <b>pronom<\/b> : il n'a pas de déterminant ni de nom noyau, donc ce n'est pas un GN.", "notion": "limites du GN"}, {"type": "vf", "q": "Vrai ou faux : dans « fit monter son fils », le GN est « monter son fils ».", "bonne": false, "explication": "C'est faux. <i>Monter<\/i> est un verbe : il ne fait pas partie du GN. Le GN est seulement <b>son fils<\/b> (déterminant <i>son<\/i> + nom <i>fils<\/i>).", "notion": "limites du GN"}, {"type": "ordre", "q": "Remets dans l'ordre les mots de ce GN enrichi.", "elements": ["les", "fables", "éducatives", "de", "La Fontaine"], "explication": "D'abord le déterminant (<i>les<\/i>), puis le nom noyau (<i>fables<\/i>), puis l'adjectif (<i>éducatives<\/i>), puis le complément du nom introduit par la préposition <i>de<\/i> (<i>de La Fontaine<\/i>).", "notion": "groupe nominal"}], MATIERE = "Français", LECON = "Le nom et le groupe nominal";
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;:!?'’"«»()\-]/g,' ').replace(/\s+/g,' ').trim()}
+function lev(a,b){const d=[...Array(a.length+1)].map((_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function juste(q,rep){const r=norm(rep);if(!r)return false;
+  if(q.contient){const m=' '+r+' ';return q.contient.every(k=>k.split('|').some(v=>m.includes(norm(v))))&&!(q.exclut||[]).some(k=>m.includes(norm(k)))}
+  if(q.reponses.some(b=>norm(b)==r))return true;
+  const proche=q.tolerance&&q.reponses.find(b=>{b=norm(b);return b.length>=5&&lev(r,b)<=1});
+  return proche?'presque':false}
+let file=Q.map((q,i)=>i), pos=0, points=0, rates=[], deuxieme=false, total=Q.length;
+const zone=document.getElementById('zone');
+function prog(){document.getElementById('prog').style.width=(100*Math.min(pos,file.length)/file.length)+'%'}
+function montrer(){
+  prog(); if(pos>=file.length){ if(!deuxieme&&rates.length){deuxieme=true;file=rates;rates=[];pos=0;
+      zone.innerHTML='<div class="carte"><h2>🔁 2e chance !</h2><p>On reprend les questions ratées. Relis bien les explications dans ta tête avant de répondre.</p><button onclick="montrer()">C\'est parti</button></div>';return}
+    return fin()}
+  const q=Q[file[pos]]; let h='<div class="carte"><p><small>Question '+(pos+1)+' / '+file.length+(deuxieme?' · 2e chance':'')+'</small></p><h2>'+q.q+'</h2>';
+  if(q.type=='court') h+='<input type="text" id="rep" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" onkeydown="if(event.key==\'Enter\')verifier()">';
+  if(q.type=='qcm') h+='<div class="choix">'+q.choix.map((c,i)=>'<button onclick="choisir(this,'+i+')">'+c+'</button>').join('')+'</div>';
+  if(q.type=='vf') h+='<div class="choix"><button onclick="choisir(this,1)">✔️ Vrai</button><button onclick="choisir(this,0)">❌ Faux</button></div>';
+  if(q.type=='ordre'){ordre=[];const m=q.elements.map((e,i)=>i).sort(()=>Math.random()-.5);
+    h+='<p><small>Touche les éléments dans le bon ordre.</small></p><div id="jetons">'+m.map(i=>'<span class="jeton" onclick="prendre(this,'+i+')">'+q.elements[i]+'</span>').join('')+'</div><p id="ordre" style="min-height:2em;font-weight:bold"></p><button class="gris" onclick="montrer()">↺ Recommencer</button>'}
+  h+='<div id="retour"></div><button id="valider" onclick="verifier()">Vérifier</button></div>';
+  zone.innerHTML=h; const r=document.getElementById('rep'); if(r) r.focus(); choix=null;
+}
+let choix=null, ordre=[];
+function choisir(b,i){document.querySelectorAll('.choix button').forEach(x=>x.classList.remove('choisi'));b.classList.add('choisi');choix=i}
+function prendre(el,i){if(el.classList.contains('pris'))return;el.classList.add('pris');ordre.push(i);
+  document.getElementById('ordre').textContent=ordre.map(k=>Q[file[pos]].elements[k]).join(' → ')}
+function verifier(){
+  const q=Q[file[pos]]; let donnee, ok;
+  let presque=false;
+  if(q.type=='court'){donnee=document.getElementById('rep').value;if(!donnee.trim())return;ok=juste(q,donnee);if(ok=='presque'){presque=true;ok=true}}
+  if(q.type=='qcm'){if(choix===null)return;donnee=q.choix[choix];ok=choix==q.bonne}
+  if(q.type=='vf'){if(choix===null)return;donnee=choix?'vrai':'faux';ok=(choix==1)==q.bonne}
+  if(q.type=='ordre'){if(ordre.length<q.elements.length)return;donnee=ordre.map(k=>q.elements[k]).join(' / ');ok=ordre.every((k,i)=>k==i)}
+  const bonne=q.type=='court'?q.reponses[0]:q.type=='qcm'?q.choix[q.bonne]:q.type=='vf'?(q.bonne?'vrai':'faux'):q.elements.join(' / ');
+  if(ok&&!deuxieme)points++; if(!ok&&!deuxieme)rates.push(file[pos]);
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'quiz',question:q.q.replace(/<[^>]+>/g,''),
+    reponse:donnee,bonne:bonne,correct:presque?'presque (orthographe)':ok?'oui':'non',notion:q.notion||''});
+  document.getElementById('retour').innerHTML='<h3 class="'+(ok?'ok':'ko')+'">'+(presque?'✅ Presque ! Attention à l\'orthographe : on écrit <u>'+bonne+'</u>':ok?'✅ Bravo !':'❌ Pas tout à fait… La bonne réponse : '+bonne)+'</h3><div class="expl">💡 '+q.explication+'</div>';
+  const v=document.getElementById('valider'); v.textContent='Question suivante ➜'; v.onclick=()=>{pos++;montrer()};
+  if(ok) confettis(20);
+}
+function fin(){
+  const n=Math.round(20*points/total), badge=n>=18?'🏆 Champion !':n>=14?'🥇 Très bien !':n>=10?'🥈 Bien, continue !':'💪 On s\'entraîne encore !';
+  zone.innerHTML='<div class="carte" id="fin"><p class="gros">'+badge.split(' ')[0]+'</p><h2>'+badge.slice(3)+'</h2><p>Du premier coup : <b>'+points+' / '+total+'</b> (soit '+n+' / 20)</p><p>Refais ce quiz dans 3 jours : c\'est en se testant plusieurs fois qu\'on retient pour de bon.</p><button onclick="location.reload()">Recommencer</button></div>';
+  confettis(n*6); prog();
+}
+function confettis(n){for(let i=0;i<n;i++){const c=document.createElement('div');c.textContent=['🎉','⭐','✨','🎊'][i%4];
+  c.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:24px;transition:transform 2.2s ease-in,opacity 2.2s;z-index:9';
+  document.body.appendChild(c);requestAnimationFrame(()=>{c.style.transform='translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*720-360)+'deg)';c.style.opacity=.2});
+  setTimeout(()=>c.remove(),2300)}}
+montrer();
+</script></body></html>

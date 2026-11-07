@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quiz – Se présenter</title><style>:root{--c:#c28a00}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.choix button{display:block;width:100%;text-align:left;background:#eef;color:#222;border:2px solid #ccd}
+.choix button.choisi{border-color:var(--c);background:#dde}
+.jeton{display:inline-block;background:#eef;border:2px solid #ccd;border-radius:10px;padding:8px 12px;margin:4px;cursor:pointer}
+.jeton.pris{opacity:.3} #fin{text-align:center} .gros{font-size:3em;margin:0}
+</style></head><body>
+<header><h1>🧠 Quiz – Se présenter</h1><p>Allemand · écris ta réponse, puis vérifie. Pas de stress : chaque erreur t'apprend quelque chose !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><div id="zone"></div></main>
+<script>
+const Q = [{"type": "court", "q": "Réponds en allemand à la question : « Wie heißt du? » (tu t'appelles Elouan)", "reponses": ["Ich heiße Elouan.", "Ich heisse Elouan", "Mein Name ist Elouan", "Ich bin Elouan"], "notion": "dire son nom", "explication": "Avec <i>ich<\/i>, le verbe ne finit pas par -t : il finit par <b>-e<\/b>. On écrit donc <b>Ich heiße Elouan.<\/b> On peut aussi dire <b>Mein Name ist Elouan.<\/b> (mein : e puis i)."}, {"type": "court", "q": "Traduis en allemand : « J'ai onze ans. » (écris le nombre en lettres)", "reponses": ["Ich bin elf Jahre alt."], "tolerance": true, "notion": "dire son âge", "explication": "En français, on dit l'âge avec le verbe avoir. En allemand, on ne dit pas l'âge avec avoir : on le dit avec être, <i>ich bin<\/i>. On ajoute <i>Jahre alt<\/i> : <b>Ich bin elf Jahre alt.<\/b>"}, {"type": "court", "q": "Complète avec le verbe sein : « Wie alt ___ du? »", "reponses": ["bist"], "notion": "verbe sein", "explication": "Le verbe sein est irrégulier : ich bin, <b>du bist<\/b>, er ist. Avec du, on écrit donc <b>bist<\/b> : <i>Wie alt bist du?<\/i>"}, {"type": "court", "q": "Complète avec le verbe sein : « Ich ___ zwölf Jahre alt. »", "reponses": ["bin"], "notion": "verbe sein", "explication": "Avec ich, le verbe sein donne <b>bin<\/b>, sans e à la fin : <i>ich bin<\/i>. On n'écrit pas « bine »."}, {"type": "qcm", "q": "Ton correspondant te demande : « Wo wohnst du? ». Que te demande-t-il ?", "choix": ["le pays d'où tu viens", "la ville où tu habites", "ton âge"], "bonne": 1, "notion": "Wo / Woher", "explication": "<b>Wo<\/b> veut dire « où », et <i>wohnen<\/i> veut dire habiter : la question demande la ville où tu habites. La question qui demande le pays d'où tu viens n'est pas <i>Wo<\/i> : c'est <i>Woher kommst du?<\/i>"}, {"type": "court", "q": "Réponds en allemand à : « Woher kommst du? » (tu viens de France)", "reponses": ["Ich komme aus Frankreich."], "tolerance": true, "notion": "Wo / Woher", "explication": "<i>Woher<\/i> demande le pays d'où tu viens. On répond avec <i>ich komme<\/i> et <b>aus<\/b>, puis le nom allemand du pays : <b>Ich komme aus Frankreich.<\/b> On n'écrit pas « France » : c'est le nom français."}, {"type": "court", "q": "Traduis en allemand : « J'habite à Castanet. »", "reponses": ["Ich wohne in Castanet.", "Ich lebe in Castanet"], "tolerance": true, "notion": "Wo / Woher", "explication": "Avec ich, le verbe prend seulement <b>-e<\/b> : <i>ich wohne<\/i> (et pas « ich wohnet »). Pour la ville, on utilise <b>in<\/b> : <b>Ich wohne in Castanet.<\/b>"}, {"type": "court", "q": "Complète avec heißen : « Wie ___ du? »", "reponses": ["heißt", "heisst"], "notion": "heißen : du heißt", "explication": "Avec du, on ajoute normalement -st. Mais le radical de heißen finit par ß, qui vaut déjà deux s : on ajoute seulement <b>-t<\/b>. On écrit donc <b>du heißt<\/b>."}, {"type": "court", "q": "Complète avec kommen : « Du ___ aus Deutschland. »", "reponses": ["kommst"], "notion": "présent -e -st -t", "explication": "On enlève -en à <i>kommen<\/i>, il reste <i>komm<\/i>. Avec du, on ajoute <b>-st<\/b> : <b>du kommst<\/b>."}, {"type": "court", "q": "Présente Jasper en une phrase : « Il habite à Langen. »", "reponses": ["Er wohnt in Langen."], "notion": "présenter quelqu'un", "explication": "Pour parler de soi, on dit ich wohne. Pour parler d'un garçon, on ne dit pas ich : on dit <b>er<\/b>, et le verbe finit par <b>-t<\/b> : <b>Er wohnt in Langen.<\/b>"}, {"type": "court", "q": "Traduis en allemand : « Elle s'appelle Moya. »", "reponses": ["Sie heißt Moya.", "Sie heisst Moya"], "notion": "présenter quelqu'un", "explication": "Pour une fille, on dit <b>sie<\/b>. Avec sie, heißen prend <b>-t<\/b> : <b>Sie heißt Moya.<\/b>"}, {"type": "court", "q": "Traduis en allemand : « Je viens de Turquie. »", "reponses": ["Ich komme aus der Türkei."], "tolerance": true, "notion": "aus der + pays", "explication": "Le pays s'appelle <i>die Türkei<\/i> : il a l'article die. Pour ces pays-là, on ne dit pas aus tout seul : on dit <b>aus der<\/b>. Et on écrit Türk<b>ei<\/b>, e puis i : <b>Ich komme aus der Türkei.<\/b>"}, {"type": "qcm", "q": "Quelle phrase est juste ?", "choix": ["Ich komme aus Schweiz.", "Ich komme aus der Schweiz.", "Ich komme in der Schweiz."], "bonne": 1, "notion": "aus der + pays", "explication": "Le pays s'appelle <i>die Schweiz<\/i> : il a l'article die, donc on dit <b>aus der Schweiz<\/b>. On ne dit pas <i>in<\/i> avec kommen : <i>in<\/i> va avec wohnen, et <i>aus<\/i> va avec kommen."}, {"type": "vf", "q": "Vrai ou faux : dans « lese », c'est « du » qui fait l'action.", "bonne": false, "notion": "présent -e -st -t", "explication": "C'est faux. La terminaison <b>-e<\/b> va avec <b>ich<\/b> : <i>ich lese<\/i>. La terminaison qui va avec du n'est pas -e : c'est -st, comme dans <i>du singst<\/i>, <i>du malst<\/i>."}, {"type": "ordre", "q": "Remets les mots dans l'ordre : « Woher kommst du? »", "elements": ["Woher", "kommst", "du?"], "notion": "questions de présentation", "explication": "La question commence par le mot interrogatif <b>Woher<\/b>, puis vient le verbe <b>kommst<\/b>, puis le sujet <b>du<\/b> : <b>Woher kommst du?<\/b>"}], MATIERE = "Allemand", LECON = "Se présenter";
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;:!?'’"«»()\-]/g,' ').replace(/\s+/g,' ').trim()}
+function lev(a,b){const d=[...Array(a.length+1)].map((_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function juste(q,rep){const r=norm(rep);if(!r)return false;
+  if(q.contient){const m=' '+r+' ';return q.contient.every(k=>k.split('|').some(v=>m.includes(norm(v))))&&!(q.exclut||[]).some(k=>m.includes(norm(k)))}
+  if(q.reponses.some(b=>norm(b)==r))return true;
+  const proche=q.tolerance&&q.reponses.find(b=>{b=norm(b);return b.length>=5&&lev(r,b)<=1});
+  return proche?'presque':false}
+let file=Q.map((q,i)=>i), pos=0, points=0, rates=[], deuxieme=false, total=Q.length;
+const zone=document.getElementById('zone');
+function prog(){document.getElementById('prog').style.width=(100*Math.min(pos,file.length)/file.length)+'%'}
+function montrer(){
+  prog(); if(pos>=file.length){ if(!deuxieme&&rates.length){deuxieme=true;file=rates;rates=[];pos=0;
+      zone.innerHTML='<div class="carte"><h2>🔁 2e chance !</h2><p>On reprend les questions ratées. Relis bien les explications dans ta tête avant de répondre.</p><button onclick="montrer()">C\'est parti</button></div>';return}
+    return fin()}
+  const q=Q[file[pos]]; let h='<div class="carte"><p><small>Question '+(pos+1)+' / '+file.length+(deuxieme?' · 2e chance':'')+'</small></p><h2>'+q.q+'</h2>';
+  if(q.type=='court') h+='<input type="text" id="rep" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" onkeydown="if(event.key==\'Enter\')verifier()">';
+  if(q.type=='qcm') h+='<div class="choix">'+q.choix.map((c,i)=>'<button onclick="choisir(this,'+i+')">'+c+'</button>').join('')+'</div>';
+  if(q.type=='vf') h+='<div class="choix"><button onclick="choisir(this,1)">✔️ Vrai</button><button onclick="choisir(this,0)">❌ Faux</button></div>';
+  if(q.type=='ordre'){ordre=[];const m=q.elements.map((e,i)=>i).sort(()=>Math.random()-.5);
+    h+='<p><small>Touche les éléments dans le bon ordre.</small></p><div id="jetons">'+m.map(i=>'<span class="jeton" onclick="prendre(this,'+i+')">'+q.elements[i]+'</span>').join('')+'</div><p id="ordre" style="min-height:2em;font-weight:bold"></p><button class="gris" onclick="montrer()">↺ Recommencer</button>'}
+  h+='<div id="retour"></div><button id="valider" onclick="verifier()">Vérifier</button></div>';
+  zone.innerHTML=h; const r=document.getElementById('rep'); if(r) r.focus(); choix=null;
+}
+let choix=null, ordre=[];
+function choisir(b,i){document.querySelectorAll('.choix button').forEach(x=>x.classList.remove('choisi'));b.classList.add('choisi');choix=i}
+function prendre(el,i){if(el.classList.contains('pris'))return;el.classList.add('pris');ordre.push(i);
+  document.getElementById('ordre').textContent=ordre.map(k=>Q[file[pos]].elements[k]).join(' → ')}
+function verifier(){
+  const q=Q[file[pos]]; let donnee, ok;
+  let presque=false;
+  if(q.type=='court'){donnee=document.getElementById('rep').value;if(!donnee.trim())return;ok=juste(q,donnee);if(ok=='presque'){presque=true;ok=true}}
+  if(q.type=='qcm'){if(choix===null)return;donnee=q.choix[choix];ok=choix==q.bonne}
+  if(q.type=='vf'){if(choix===null)return;donnee=choix?'vrai':'faux';ok=(choix==1)==q.bonne}
+  if(q.type=='ordre'){if(ordre.length<q.elements.length)return;donnee=ordre.map(k=>q.elements[k]).join(' / ');ok=ordre.every((k,i)=>k==i)}
+  const bonne=q.type=='court'?q.reponses[0]:q.type=='qcm'?q.choix[q.bonne]:q.type=='vf'?(q.bonne?'vrai':'faux'):q.elements.join(' / ');
+  if(ok&&!deuxieme)points++; if(!ok&&!deuxieme)rates.push(file[pos]);
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'quiz',question:q.q.replace(/<[^>]+>/g,''),
+    reponse:donnee,bonne:bonne,correct:presque?'presque (orthographe)':ok?'oui':'non',notion:q.notion||''});
+  document.getElementById('retour').innerHTML='<h3 class="'+(ok?'ok':'ko')+'">'+(presque?'✅ Presque ! Attention à l\'orthographe : on écrit <u>'+bonne+'</u>':ok?'✅ Bravo !':'❌ Pas tout à fait… La bonne réponse : '+bonne)+'</h3><div class="expl">💡 '+q.explication+'</div>';
+  const v=document.getElementById('valider'); v.textContent='Question suivante ➜'; v.onclick=()=>{pos++;montrer()};
+  if(ok) confettis(20);
+}
+function fin(){
+  const n=Math.round(20*points/total), badge=n>=18?'🏆 Champion !':n>=14?'🥇 Très bien !':n>=10?'🥈 Bien, continue !':'💪 On s\'entraîne encore !';
+  zone.innerHTML='<div class="carte" id="fin"><p class="gros">'+badge.split(' ')[0]+'</p><h2>'+badge.slice(3)+'</h2><p>Du premier coup : <b>'+points+' / '+total+'</b> (soit '+n+' / 20)</p><p>Refais ce quiz dans 3 jours : c\'est en se testant plusieurs fois qu\'on retient pour de bon.</p><button onclick="location.reload()">Recommencer</button></div>';
+  confettis(n*6); prog();
+}
+function confettis(n){for(let i=0;i<n;i++){const c=document.createElement('div');c.textContent=['🎉','⭐','✨','🎊'][i%4];
+  c.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:24px;transition:transform 2.2s ease-in,opacity 2.2s;z-index:9';
+  document.body.appendChild(c);requestAnimationFrame(()=>{c.style.transform='translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*720-360)+'deg)';c.style.opacity=.2});
+  setTimeout(()=>c.remove(),2300)}}
+montrer();
+</script></body></html>

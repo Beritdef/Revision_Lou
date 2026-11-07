@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quiz – Les mots invariables</title><style>:root{--c:#b3412f}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.choix button{display:block;width:100%;text-align:left;background:#eef;color:#222;border:2px solid #ccd}
+.choix button.choisi{border-color:var(--c);background:#dde}
+.jeton{display:inline-block;background:#eef;border:2px solid #ccd;border-radius:10px;padding:8px 12px;margin:4px;cursor:pointer}
+.jeton.pris{opacity:.3} #fin{text-align:center} .gros{font-size:3em;margin:0}
+</style></head><body>
+<header><h1>🧠 Quiz – Les mots invariables</h1><p>Français · écris ta réponse, puis vérifie. Pas de stress : chaque erreur t'apprend quelque chose !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><div id="zone"></div></main>
+<script>
+const Q = [{"type": "court", "q": "Écris les six conjonctions de coordination.", "reponses": ["mais ou et or ni car"], "contient": ["mais", "ou", "et", "or", "ni", "car"], "explication": "Les conjonctions de coordination sont <b>mais, ou, et, or, ni, car<\/b>. Elles relient deux éléments de même fonction.", "notion": "conjonction de coordination"}, {"type": "court", "q": "Un adverbe exprime le temps, le lieu, la manière, l'intensité, ou la … (le 5e mot)", "reponses": ["negation", "la negation"], "explication": "Le cinquième sens est la <b>négation<\/b> : <i>ne… pas<\/i>, <i>jamais<\/i>. Les cinq sens de l'adverbe sont le temps, le lieu, la manière, l'intensité et la négation.", "notion": "adverbe"}, {"type": "court", "q": "Quelle est la classe grammaticale de « Demain » dans « Demain, il ira au cinéma » ?", "reponses": ["adverbe", "un adverbe", "adverbe de temps"], "contient": ["adverbe"], "explication": "<i>Demain<\/i> dit <b>quand<\/b> : c'est un <b>adverbe<\/b> de temps. Il est invariable et il précise toute la phrase.", "notion": "adverbe"}, {"type": "court", "q": "Quelle est la classe grammaticale de « dans » dans « Les enfants jouent dans le jardin » ?", "reponses": ["preposition", "une preposition"], "explication": "<i>Dans<\/i> introduit le complément <i>le jardin<\/i> : c'est une <b>préposition<\/b>. Ce n'est pas une proposition : une proposition est un morceau de phrase avec un verbe.", "notion": "préposition"}, {"type": "court", "q": "Quelle est la classe grammaticale de « quand » dans « Je viendrai quand tu seras chez toi » ?", "reponses": ["conjonction de subordination"], "contient": ["subordination"], "explication": "<i>Quand<\/i> introduit la proposition subordonnée <i>quand tu seras chez toi<\/i> : c'est une <b>conjonction de subordination<\/b>. Ce n'est pas une conjonction de coordination : <i>quand<\/i> n'est pas dans la liste « mais, ou, et, or, ni, car ».", "notion": "conjonction de subordination"}, {"type": "court", "q": "Quelle est la classe grammaticale de « et » dans « Ce film est drôle et émouvant » ?", "reponses": ["conjonction de coordination"], "contient": ["coordination"], "explication": "<i>Et<\/i> relie deux adjectifs, <i>drôle<\/i> et <i>émouvant<\/i> : c'est une <b>conjonction de coordination<\/b>.", "notion": "conjonction de coordination"}, {"type": "court", "q": "Quelle est la classe grammaticale de « Ah » dans « Ah, quel vacarme ! » ?", "reponses": ["interjection", "une interjection"], "explication": "<i>Ah<\/i> exprime une émotion : c'est une <b>interjection<\/b>. On ne dit pas « injonction » : une injonction est un ordre.", "notion": "interjection"}, {"type": "court", "q": "Complète avec une conjonction de subordination (devant une voyelle) : « ___ s'est approché, le chat s'est enfui. » Écris « lorsque » + « il ».", "reponses": ["lorsqu'il", "lorsqu il"], "explication": "Devant <i>il<\/i>, le e de <i>lorsque<\/i> disparaît : on écrit <b>lorsqu'il<\/b>, avec une apostrophe. On n'écrit pas « lorsque il ».", "notion": "conjonction de subordination"}, {"type": "court", "q": "Corrige l'expression de ton cours : « une prépositions subordonnée ».", "reponses": ["une proposition subordonnee"], "explication": "On écrit <b>une proposition subordonnée<\/b>. Une <i>préposition<\/i> est un petit mot (à, dans) ; une <i>proposition<\/i> est un morceau de phrase avec un verbe. Et après <i>une<\/i>, pas de -s.", "notion": "préposition"}, {"type": "court", "q": "Écris le mot du cours : « Ah, quel vaca___ ! » (un grand bruit)", "reponses": ["vacarme"], "explication": "On écrit <b>vacarme<\/b>, avec un r puis un m. Dans ton cours, tu avais écrit « vacare ».", "notion": "orthographe d'usage"}, {"type": "qcm", "q": "Complète : « Elle est prête ___ tout pour gagner. »", "choix": ["pour", "à", "de"], "bonne": 1, "explication": "Après <i>prêt<\/i> ou <i>prête<\/i>, on utilise la préposition <b>à<\/b> : prête à tout. On ne dit pas « prête pour tout » : c'était ton erreur dans l'exercice.", "notion": "préposition"}, {"type": "qcm", "q": "« Aujourd'hui, le soleil brillait. » Que précise l'adverbe « aujourd'hui » ?", "choix": ["le mot soleil", "le mot brillait", "toute la phrase"], "bonne": 2, "explication": "<i>Aujourd'hui<\/i> dit quand tout se passe : il précise <b>toute la phrase<\/b>, pas un seul mot. Dans l'exercice, tu avais souligné <i>soleil<\/i>.", "notion": "adverbe"}, {"type": "qcm", "q": "« Ils étaient assis autour d'eux. » Quelle est la classe de « autour (de) » ?", "choix": ["adverbe", "préposition", "conjonction de coordination"], "bonne": 1, "explication": "<i>Autour de<\/i> introduit le complément <i>eux<\/i> : c'est une <b>préposition<\/b>. Un adverbe, lui, n'introduit pas de complément.", "notion": "préposition"}, {"type": "vf", "q": "Vrai ou faux : « grosses » est un adverbe.", "bonne": false, "explication": "C'est faux. <i>Grosses<\/i> prend un -e et un -s : il change de forme, donc il est variable. C'est un <b>adjectif<\/b>. Un adverbe ne change jamais de forme.", "notion": "adverbe"}], MATIERE = "Français", LECON = "Les mots invariables";
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;:!?'’"«»()\-]/g,' ').replace(/\s+/g,' ').trim()}
+function lev(a,b){const d=[...Array(a.length+1)].map((_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function juste(q,rep){const r=norm(rep);if(!r)return false;
+  if(q.contient){const m=' '+r+' ';return q.contient.every(k=>k.split('|').some(v=>m.includes(norm(v))))&&!(q.exclut||[]).some(k=>m.includes(norm(k)))}
+  if(q.reponses.some(b=>norm(b)==r))return true;
+  const proche=q.tolerance&&q.reponses.find(b=>{b=norm(b);return b.length>=5&&lev(r,b)<=1});
+  return proche?'presque':false}
+let file=Q.map((q,i)=>i), pos=0, points=0, rates=[], deuxieme=false, total=Q.length;
+const zone=document.getElementById('zone');
+function prog(){document.getElementById('prog').style.width=(100*Math.min(pos,file.length)/file.length)+'%'}
+function montrer(){
+  prog(); if(pos>=file.length){ if(!deuxieme&&rates.length){deuxieme=true;file=rates;rates=[];pos=0;
+      zone.innerHTML='<div class="carte"><h2>🔁 2e chance !</h2><p>On reprend les questions ratées. Relis bien les explications dans ta tête avant de répondre.</p><button onclick="montrer()">C\'est parti</button></div>';return}
+    return fin()}
+  const q=Q[file[pos]]; let h='<div class="carte"><p><small>Question '+(pos+1)+' / '+file.length+(deuxieme?' · 2e chance':'')+'</small></p><h2>'+q.q+'</h2>';
+  if(q.type=='court') h+='<input type="text" id="rep" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" onkeydown="if(event.key==\'Enter\')verifier()">';
+  if(q.type=='qcm') h+='<div class="choix">'+q.choix.map((c,i)=>'<button onclick="choisir(this,'+i+')">'+c+'</button>').join('')+'</div>';
+  if(q.type=='vf') h+='<div class="choix"><button onclick="choisir(this,1)">✔️ Vrai</button><button onclick="choisir(this,0)">❌ Faux</button></div>';
+  if(q.type=='ordre'){ordre=[];const m=q.elements.map((e,i)=>i).sort(()=>Math.random()-.5);
+    h+='<p><small>Touche les éléments dans le bon ordre.</small></p><div id="jetons">'+m.map(i=>'<span class="jeton" onclick="prendre(this,'+i+')">'+q.elements[i]+'</span>').join('')+'</div><p id="ordre" style="min-height:2em;font-weight:bold"></p><button class="gris" onclick="montrer()">↺ Recommencer</button>'}
+  h+='<div id="retour"></div><button id="valider" onclick="verifier()">Vérifier</button></div>';
+  zone.innerHTML=h; const r=document.getElementById('rep'); if(r) r.focus(); choix=null;
+}
+let choix=null, ordre=[];
+function choisir(b,i){document.querySelectorAll('.choix button').forEach(x=>x.classList.remove('choisi'));b.classList.add('choisi');choix=i}
+function prendre(el,i){if(el.classList.contains('pris'))return;el.classList.add('pris');ordre.push(i);
+  document.getElementById('ordre').textContent=ordre.map(k=>Q[file[pos]].elements[k]).join(' → ')}
+function verifier(){
+  const q=Q[file[pos]]; let donnee, ok;
+  let presque=false;
+  if(q.type=='court'){donnee=document.getElementById('rep').value;if(!donnee.trim())return;ok=juste(q,donnee);if(ok=='presque'){presque=true;ok=true}}
+  if(q.type=='qcm'){if(choix===null)return;donnee=q.choix[choix];ok=choix==q.bonne}
+  if(q.type=='vf'){if(choix===null)return;donnee=choix?'vrai':'faux';ok=(choix==1)==q.bonne}
+  if(q.type=='ordre'){if(ordre.length<q.elements.length)return;donnee=ordre.map(k=>q.elements[k]).join(' / ');ok=ordre.every((k,i)=>k==i)}
+  const bonne=q.type=='court'?q.reponses[0]:q.type=='qcm'?q.choix[q.bonne]:q.type=='vf'?(q.bonne?'vrai':'faux'):q.elements.join(' / ');
+  if(ok&&!deuxieme)points++; if(!ok&&!deuxieme)rates.push(file[pos]);
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'quiz',question:q.q.replace(/<[^>]+>/g,''),
+    reponse:donnee,bonne:bonne,correct:presque?'presque (orthographe)':ok?'oui':'non',notion:q.notion||''});
+  document.getElementById('retour').innerHTML='<h3 class="'+(ok?'ok':'ko')+'">'+(presque?'✅ Presque ! Attention à l\'orthographe : on écrit <u>'+bonne+'</u>':ok?'✅ Bravo !':'❌ Pas tout à fait… La bonne réponse : '+bonne)+'</h3><div class="expl">💡 '+q.explication+'</div>';
+  const v=document.getElementById('valider'); v.textContent='Question suivante ➜'; v.onclick=()=>{pos++;montrer()};
+  if(ok) confettis(20);
+}
+function fin(){
+  const n=Math.round(20*points/total), badge=n>=18?'🏆 Champion !':n>=14?'🥇 Très bien !':n>=10?'🥈 Bien, continue !':'💪 On s\'entraîne encore !';
+  zone.innerHTML='<div class="carte" id="fin"><p class="gros">'+badge.split(' ')[0]+'</p><h2>'+badge.slice(3)+'</h2><p>Du premier coup : <b>'+points+' / '+total+'</b> (soit '+n+' / 20)</p><p>Refais ce quiz dans 3 jours : c\'est en se testant plusieurs fois qu\'on retient pour de bon.</p><button onclick="location.reload()">Recommencer</button></div>';
+  confettis(n*6); prog();
+}
+function confettis(n){for(let i=0;i<n;i++){const c=document.createElement('div');c.textContent=['🎉','⭐','✨','🎊'][i%4];
+  c.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:24px;transition:transform 2.2s ease-in,opacity 2.2s;z-index:9';
+  document.body.appendChild(c);requestAnimationFrame(()=>{c.style.transform='translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*720-360)+'deg)';c.style.opacity=.2});
+  setTimeout(()=>c.remove(),2300)}}
+montrer();
+</script></body></html>
