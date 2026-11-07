@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flashcards – Histoire - Vivre au Paléolithique et l&#x27;art des grottes</title><style>:root{--c:#8a5a2b}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – Histoire - Vivre au Paléolithique et l&#x27;art des grottes</h1><p>Histoire-Géo-EMC · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Comment s'appelle la première période de la Préhistoire ?", "r": "La première période de la Préhistoire s'appelle le Paléolithique. Elle commence avec l'apparition des premiers hommes.", "notion": "Paléolithique"}, {"q": "Qu'est-ce qu'un nomade ?", "r": "Un nomade est une personne qui n'a pas d'habitat fixe.", "notion": "nomade"}, {"q": "Les hommes du Paléolithique sont-ils nomades ? Pourquoi ?", "r": "Oui. Ils n'ont pas d'habitat fixe : ils se déplacent pour chasser, pêcher et cueillir leur nourriture.", "notion": "nomade"}, {"q": "Comment les hommes du Paléolithique se nourrissent-ils ?", "r": "Ils se nourrissent par la chasse, la pêche et la cueillette.", "notion": "vie au Paléolithique"}, {"q": "Les hommes du Paléolithique cultivent-ils la terre ?", "r": "Non. Au Paléolithique, il n'y a pas d'agriculture : les hommes chassent, pêchent et cueillent. L'agriculture commence au Néolithique, vers −10 000.", "notion": "agriculture"}, {"q": "Quand et à quelle période commence l'agriculture ?", "r": "L'agriculture commence au Néolithique, vers −10 000. Elle ne commence pas au Paléolithique.", "notion": "agriculture"}, {"q": "D'où viennent les peaux d'animaux des hommes du Paléolithique ?", "r": "Elles viennent de la chasse, pas de l'agriculture.", "notion": "agriculture"}, {"q": "Où vivent les hommes du Paléolithique ?", "r": "Ils vivent dans un habitat temporaire : une tente en peau, une entrée de grotte…", "notion": "vie au Paléolithique"}, {"q": "En quels matériaux sont faits les outils du Paléolithique ?", "r": "Les outils sont en bois, en os et en pierre taillée.", "notion": "vie au Paléolithique"}, {"q": "Qu'ont trouvé les archéologues dans le campement de Pincevent ?", "r": "Ils ont trouvé des restes d'os, des éclats de silex et des traces de foyer.", "notion": "traces archéologiques"}, {"q": "Qu'est-ce que l'art pariétal ?", "r": "L'art pariétal est l'ensemble des dessins, peintures et gravures réalisés sur les parois des grottes.", "notion": "art pariétal"}, {"q": "Quand et par qui la grotte Chauvet a-t-elle été découverte ?", "r": "La grotte Chauvet a été découverte en 1994 par des spéléologues.", "notion": "grotte Chauvet"}, {"q": "Quel âge ont les œuvres de la grotte Chauvet ? Quelle grotte célèbre a-t-elle dépassée en ancienneté ?", "r": "Elles ont environ 30 000 ans. La grotte Chauvet a dépassé en ancienneté la grotte de Lascaux.", "notion": "grotte Chauvet"}, {"q": "Que fait-on pour protéger la grotte Chauvet ?", "r": "On l'a fermée au public.", "notion": "grotte Chauvet"}, {"q": "Combien de dessins contient la grotte Chauvet ?", "r": "Elle contient environ 1 000 dessins, dont 425 figures animales.", "notion": "grotte Chauvet"}, {"q": "Les hommes choisissaient-ils les animaux par hasard ? Justifie.", "r": "Non. Ils peignaient les animaux les plus redoutables et les moins chassés : ours et lions des cavernes, rhinocéros laineux, mammouths.", "notion": "grotte Chauvet"}, {"q": "Les peintures de la grotte Chauvet sont-elles un décor ? Pourquoi ?", "r": "Non. La grotte n'était pas un lieu de vie, donc les œuvres ne sont pas un décor : elles avaient un sens pour les hommes.", "notion": "grotte Chauvet"}, {"q": "Connaît-on vraiment la signification des peintures de la grotte Chauvet ?", "r": "Non. On ne la connaît pas avec certitude : on fait seulement des hypothèses.", "notion": "grotte Chauvet"}, {"q": "Avec quels matériaux a été peint le panneau des chevaux ?", "r": "Il a été peint avec du charbon de bois (le noir) et de l'ocre.", "notion": "techniques de l'art pariétal"}, {"q": "Quelles techniques ont été utilisées pour le panneau des chevaux ?", "r": "La couleur noire est estompée pour donner du relief, et la peinture est raclée pour faire ressortir les animaux.", "notion": "techniques de l'art pariétal"}, {"q": "Quelles sont les 5 étapes pour présenter et décrire une image en histoire ?", "r": "1. la nature de l'image ; 2. où et quand ; 3. le sujet général ; 4. la description par plans ; 5. l'analyse : quelles informations m'apporte l'image.", "notion": "méthode image"}, {"q": "Quand on décrit une image par plans, quels sont les trois plans ?", "r": "Le premier plan (l'action devant), le deuxième plan (l'action au centre) et l'arrière-plan (le paysage lointain).", "notion": "méthode image"}], MATIERE = "Histoire-Géo-EMC", LECON = "Histoire - Vivre au Paléolithique et l'art des grottes", LECON_ID = "histoire-geo-emc-histoire-vivre-au-paleolithique-et-l-art-des-grottes", CLE = 'elouan_cartes_' + LECON_ID;
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // n° carte -> {ecart, du, t}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// Calendrier partagé entre les appareils (maison / école) via le Google Sheet : la note la plus récente gagne
+async function charger(){
+  if(!ENDPOINT) return;
+  try{ const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch(ENDPOINT + '?cle=' + encodeURIComponent(CLE_SITE) + '&lecon=' + encodeURIComponent(LECON_ID), {signal: ctl.signal});
+    const d = await r.json();
+    for(const k in d) if(C[k] && (!etat[k] || (etat[k].t||0) < (d[k].t||0))) etat[k] = d[k];
+    sauver();
+  }catch(e){}   // pas de réseau : on garde le calendrier de l'appareil
+}
+function pousser(cartes){
+  if(!ENDPOINT || !Object.keys(cartes).length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({cle: CLE_SITE, calendrier: {lecon: LECON_ID, cartes: cartes}})}).catch(()=>{});
+}
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = [], faites = 0, total = 0, bilan = {su:0, moitie:0, pas:0};
+const zone = document.getElementById('zone');
+function demarrer(){
+  // cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+  let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+  const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+  file = dues.slice(); total = file.length;
+  document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+  montrer();
+  pousser(etat);   // ce qui a été fait hors connexion rejoint le calendrier partagé
+}
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; e.t = Date.now(); etat[i] = e; sauver(); pousser({[i]: e});
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro, sur tous les appareils ?\'))remiseAZero()">Remettre à zéro</button></div>';
+}
+function remiseAZero(){
+  const t = Date.now(); etat = {}; C.forEach((c,i)=>etat[i] = {ecart: 0, du: 0, t: t}); sauver(); pousser(etat);
+  setTimeout(()=>location.reload(), 1500);
+}
+zone.innerHTML = '<div class="carte">⏳ Je récupère tes cartes…</div>';
+charger().then(demarrer);
+</script></body></html>

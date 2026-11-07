@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flashcards – EMC - Représenter les autres et servir l&#x27;intérêt général</title><style>:root{--c:#8a5a2b}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – EMC - Représenter les autres et servir l&#x27;intérêt général</h1><p>Histoire-Géo-EMC · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Qu'est-ce que la démocratie ?", "r": "La démocratie est un régime politique où le pouvoir appartient à l'ensemble des citoyens grâce au vote.", "notion": "démocratie"}, {"q": "Qu'est-ce que la République ?", "r": "La République est une forme de gouvernement où le pouvoir n'est pas détenu par une personne. Ceux qui gouvernent sont désignés par la population.", "notion": "République"}, {"q": "La République est-elle une personne ? Quel mot désigne la personne choisie par les citoyens ?", "r": "Non. La République n'est pas une personne : c'est une forme de gouvernement. La personne choisie par les citoyens pour les représenter s'appelle un élu.", "notion": "République"}, {"q": "Qu'est-ce qu'un élu ?", "r": "Un élu est une personne choisie par les citoyens, grâce à une élection, pour les représenter.", "notion": "élu et élection"}, {"q": "Qu'est-ce qu'une élection ?", "r": "Une élection est un vote organisé pour permettre à des personnes de choisir leurs représentants.", "notion": "élu et élection"}, {"q": "Qu'est-ce que l'intérêt commun ?", "r": "L'intérêt commun est une action qui a pour objectif d'être utile pour plusieurs personnes.", "notion": "intérêt commun"}, {"q": "Que doit faire un représentant élu par les citoyens (Bilan 2) ?", "r": "Il doit écouter les citoyens et transmettre leurs idées (les lois) pour améliorer leur vie.", "notion": "rôle de l'élu"}, {"q": "Qu'est-ce qu'un délégué de classe et quel est son rôle principal ?", "r": "Un délégué est un élève élu par la classe. Il est le porte-parole de la classe : il la représente au conseil de classe.", "notion": "délégué"}, {"q": "Pourquoi l'élection des délégués est-elle un moment démocratique ?", "r": "Parce que chaque élève vote : chaque élève est électeur (il peut voter) et éligible (il peut être élu).", "notion": "délégué"}, {"q": "Pour combien de temps est élu un délégué ? Et un député ?", "r": "Le délégué est élu pour 1 an. Le député est élu pour 5 ans.", "notion": "délégué et député"}, {"q": "Où travaille un député, et que fait-il ?", "r": "Le député travaille à l'Assemblée nationale : il propose et vote les lois.", "notion": "délégué et député"}, {"q": "Qui peut voter aux élections en France ?", "r": "Les citoyens de nationalité française qui ont 18 ans ou plus.", "notion": "élu et élection"}, {"q": "Qui représente les citoyens dans la commune, dans le pays, et dans l'Union européenne ?", "r": "Dans la commune, c'est le maire. Dans le pays, ce sont les députés. Dans l'Union européenne, ce sont les députés européens.", "notion": "représentants à toutes les échelles"}, {"q": "Comment appelle-t-on quelqu'un qui ne va pas voter ?", "r": "On l'appelle un abstentionniste.", "notion": "vocabulaire des élections"}, {"q": "Pourquoi renouvelle-t-on les élus ?", "r": "On renouvelle les élus pour éviter qu'une personne concentre trop de pouvoirs. Une seule personne qui a tous les pouvoirs, c'est une dictature.", "notion": "vocabulaire des élections"}, {"q": "Quelles sont les deux assemblées qui votent les lois ?", "r": "L'Assemblée nationale et le Sénat.", "notion": "parcours d'une loi"}, {"q": "Qui promulgue la loi ?", "r": "Le président de la République promulgue la loi. Il ne la vote pas : ce sont l'Assemblée nationale et le Sénat qui la votent.", "notion": "parcours d'une loi"}, {"q": "Raconte le parcours de la loi sur les influenceurs (2023).", "r": "Des députés proposent la loi ; l'Assemblée nationale la vote ; le Sénat la vote ; le président de la République la promulgue.", "notion": "parcours d'une loi"}, {"q": "Comment présenter un document dans une réponse ?", "r": "Par une phrase complète qui dit sa nature, sa source et sa date. Exemple : « C'est un article de journal publié sur Ouest-France.fr le 27 mai 2024. »", "notion": "analyser un document"}, {"q": "Que faut-il faire quand une question dit « Justifie » ?", "r": "Il faut donner sa réponse, puis la preuve prise dans le document, avec le mot « car ».", "notion": "analyser un document"}, {"q": "Donne deux éléments qui montrent qu'une députée joue son rôle d'élue (document sur les colis de vêtements).", "r": "Elle a écouté les critiques de nombreux Français, et elle a proposé une loi pour taxer les colis et soutenir les entreprises françaises de vêtements.", "notion": "rôle de l'élu"}], MATIERE = "Histoire-Géo-EMC", LECON = "EMC - Représenter les autres et servir l'intérêt général", LECON_ID = "histoire-geo-emc-emc-representer-les-autres-et-servir-l-interet-general", CLE = 'elouan_cartes_' + LECON_ID;
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // n° carte -> {ecart, du, t}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// Calendrier partagé entre les appareils (maison / école) via le Google Sheet : la note la plus récente gagne
+async function charger(){
+  if(!ENDPOINT) return;
+  try{ const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch(ENDPOINT + '?cle=' + encodeURIComponent(CLE_SITE) + '&lecon=' + encodeURIComponent(LECON_ID), {signal: ctl.signal});
+    const d = await r.json();
+    for(const k in d) if(C[k] && (!etat[k] || (etat[k].t||0) < (d[k].t||0))) etat[k] = d[k];
+    sauver();
+  }catch(e){}   // pas de réseau : on garde le calendrier de l'appareil
+}
+function pousser(cartes){
+  if(!ENDPOINT || !Object.keys(cartes).length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({cle: CLE_SITE, calendrier: {lecon: LECON_ID, cartes: cartes}})}).catch(()=>{});
+}
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = [], faites = 0, total = 0, bilan = {su:0, moitie:0, pas:0};
+const zone = document.getElementById('zone');
+function demarrer(){
+  // cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+  let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+  const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+  file = dues.slice(); total = file.length;
+  document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+  montrer();
+  pousser(etat);   // ce qui a été fait hors connexion rejoint le calendrier partagé
+}
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; e.t = Date.now(); etat[i] = e; sauver(); pousser({[i]: e});
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro, sur tous les appareils ?\'))remiseAZero()">Remettre à zéro</button></div>';
+}
+function remiseAZero(){
+  const t = Date.now(); etat = {}; C.forEach((c,i)=>etat[i] = {ecart: 0, du: 0, t: t}); sauver(); pousser(etat);
+  setTimeout(()=>location.reload(), 1500);
+}
+zone.innerHTML = '<div class="carte">⏳ Je récupère tes cartes…</div>';
+charger().then(demarrer);
+</script></body></html>

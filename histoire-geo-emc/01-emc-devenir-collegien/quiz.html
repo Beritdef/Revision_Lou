@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quiz – EMC - Devenir collégien</title><style>:root{--c:#8a5a2b}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.choix button{display:block;width:100%;text-align:left;background:#eef;color:#222;border:2px solid #ccd}
+.choix button.choisi{border-color:var(--c);background:#dde}
+.jeton{display:inline-block;background:#eef;border:2px solid #ccd;border-radius:10px;padding:8px 12px;margin:4px;cursor:pointer}
+.jeton.pris{opacity:.3} #fin{text-align:center} .gros{font-size:3em;margin:0}
+</style></head><body>
+<header><h1>🧠 Quiz – EMC - Devenir collégien</h1><p>Histoire-Géo-EMC · écris ta réponse, puis vérifie. Pas de stress : chaque erreur t'apprend quelque chose !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><div id="zone"></div></main>
+<script>
+const Q = [{"type": "court", "q": "Définis le mot <b>droit<\/b> (un seul mot du cours suffit, ou une phrase).", "reponses": ["Ce que j'ai le droit de faire : une liberté"], "contient": ["liberte|libre|le droit de|je peux|on peut|permis|autorise"], "exclut": ["laicite", "oblig"], "explication": "Un droit, c'est une <b>liberté<\/b> : ce que j'ai le droit de faire (exemple : m'exprimer). Un droit n'est pas une obligation : l'obligation, c'est le devoir.", "notion": "droits et devoirs"}, {"type": "court", "q": "Définis le mot <b>devoir<\/b> (un seul mot du cours suffit, ou une phrase).", "reponses": ["Ce que je dois faire : une obligation"], "contient": ["oblig|je dois|on doit|il faut|doit"], "exclut": ["laicite", "liberte"], "explication": "Un devoir, c'est une <b>obligation<\/b> : ce que je dois faire (exemple : être ponctuel). Un devoir n'est pas une liberté : la liberté, c'est le droit.", "notion": "droits et devoirs"}, {"type": "court", "q": "« Être ponctuel » : est-ce un droit ou un devoir du collégien ?", "reponses": ["devoir", "un devoir", "c'est un devoir"], "explication": "Être ponctuel est un <b>devoir<\/b> : c'est une obligation, je dois arriver à l'heure. Ce n'est pas un droit, car je ne suis pas libre d'arriver en retard.", "notion": "droits et devoirs"}, {"type": "court", "q": "« Être écouté » : est-ce un droit ou un devoir du collégien ?", "reponses": ["droit", "un droit", "c'est un droit"], "explication": "Être écouté est un <b>droit<\/b> du collégien : c'est ce que le collège doit lui garantir. Ce n'est pas un devoir, car ce n'est pas une obligation que l'élève doit remplir.", "notion": "droits et devoirs"}, {"type": "court", "q": "Comment s'appelle le texte officiel qui fixe les règles à respecter par tous au collège ?", "reponses": ["règlement intérieur", "le règlement intérieur", "reglement interieur"], "tolerance": true, "explication": "C'est le <b>règlement intérieur<\/b>. Dans la société, les règles s'appellent les lois ; au collège, elles sont regroupées dans le règlement intérieur.", "notion": "règlement intérieur"}, {"type": "qcm", "q": "Un élève dit : « Au collège, c'est comme dans la société, je peux faire tout ce que je veux. » Quelle réponse est <b>complète<\/b> ?", "choix": ["Non, car au collège il y a des règles écrites dans le règlement intérieur, et dans la société il y a des lois : on ne fait pas tout ce qu'on veut.", "Non, l'élève a des droits et des devoirs.", "Non, c'est interdit."], "bonne": 0, "explication": "La deuxième réponse est juste, mais elle ne dit pas <b>pourquoi<\/b> : c'est ce que le professeur appelle « Précise ». La bonne réponse nomme les règles (le règlement intérieur au collège, les lois dans la société).", "notion": "justifier une réponse"}, {"type": "court", "q": "Définis la <b>laïcité<\/b>.", "reponses": ["Principe qui garantit la liberté de croire ou de ne pas croire à une religion"], "contient": ["croire", "ne pas croire|pas croire|ne pas y croire|aucune religion|pas de religion|ou non|ou pas"], "explication": "La laïcité est le principe qui garantit la <b>liberté de croire ou de ne pas croire<\/b> à une religion. Ce n'est pas seulement « ne pas se moquer des religions » : c'est une liberté pour tous, croyants et non-croyants.", "notion": "laïcité"}, {"type": "vf", "q": "Vrai ou faux : « La laïcité, c'est seulement qu'on ne se moque pas des religions des autres. »", "bonne": false, "explication": "C'est faux. Ne pas se moquer des croyances des autres fait partie de la fraternité, mais ce n'est pas la définition de la laïcité. La laïcité garantit la liberté de croire ou de ne pas croire, et l'État y est neutre.", "notion": "laïcité"}, {"type": "court", "q": "En quelle année l'<b>École<\/b> est-elle devenue laïque ?", "reponses": ["1882", "en 1882"], "explication": "L'École est laïque depuis <b>1882<\/b>. L'État, lui, n'est pas devenu laïque en 1882 : il est devenu laïque plus tard, en 1905.", "notion": "dates de la laïcité"}, {"type": "court", "q": "En quelle année l'<b>État<\/b> est-il devenu laïque (séparation de l'Église et de l'État) ?", "reponses": ["1905", "en 1905"], "explication": "L'État est laïque depuis <b>1905<\/b> : c'est la séparation de l'Église et de l'État. L'École était déjà laïque depuis 1882.", "notion": "dates de la laïcité"}, {"type": "court", "q": "Quels sont les <b>trois principes<\/b> garantis par la laïcité ?", "reponses": ["la liberté, l'égalité et la fraternité"], "contient": ["libert", "egalit", "fraternit"], "explication": "La laïcité garantit la <b>liberté<\/b> (avoir ou ne pas avoir une religion), l'<b>égalité<\/b> (les mêmes droits pour tous) et la <b>fraternité<\/b> (le respect des croyances des autres). À l'évaluation, explique chaque principe en une phrase.", "notion": "principes de la laïcité"}, {"type": "court", "q": "Complète le bilan : « L'État respecte toutes les religions mais il n'en favorise aucune : l'État français est donc … »", "reponses": ["neutre", "il est neutre"], "tolerance": true, "explication": "L'État est <b>neutre<\/b> : il ne favorise aucune religion et il n'en impose aucune. Neutre ne veut pas dire contre les religions : l'État les respecte toutes.", "notion": "neutralité de l'État"}, {"type": "court", "q": "Comment s'appelle le texte de 2013, avec 15 articles, qui garantit la laïcité au collège ?", "reponses": ["la Charte de la laïcité", "Charte de la laïcité", "charte de laicite", "la charte"], "tolerance": true, "explication": "C'est la <b>Charte de la laïcité<\/b> (2013, 15 articles). Ce n'est pas le règlement intérieur : le règlement intérieur fixe toutes les règles du collège, la Charte explique la laïcité.", "notion": "Charte de la laïcité"}], MATIERE = "Histoire-Géo-EMC", LECON = "EMC - Devenir collégien";
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;:!?'’"«»()\-]/g,' ').replace(/\s+/g,' ').trim()}
+function lev(a,b){const d=[...Array(a.length+1)].map((_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function juste(q,rep){const r=norm(rep);if(!r)return false;
+  if(q.contient){const m=' '+r+' ';return q.contient.every(k=>k.split('|').some(v=>m.includes(norm(v))))&&!(q.exclut||[]).some(k=>m.includes(norm(k)))}
+  if(q.reponses.some(b=>norm(b)==r))return true;
+  const proche=q.tolerance&&q.reponses.find(b=>{b=norm(b);return b.length>=5&&lev(r,b)<=1});
+  return proche?'presque':false}
+let file=Q.map((q,i)=>i), pos=0, points=0, rates=[], deuxieme=false, total=Q.length;
+const zone=document.getElementById('zone');
+function prog(){document.getElementById('prog').style.width=(100*Math.min(pos,file.length)/file.length)+'%'}
+function montrer(){
+  prog(); if(pos>=file.length){ if(!deuxieme&&rates.length){deuxieme=true;file=rates;rates=[];pos=0;
+      zone.innerHTML='<div class="carte"><h2>🔁 2e chance !</h2><p>On reprend les questions ratées. Relis bien les explications dans ta tête avant de répondre.</p><button onclick="montrer()">C\'est parti</button></div>';return}
+    return fin()}
+  const q=Q[file[pos]]; let h='<div class="carte"><p><small>Question '+(pos+1)+' / '+file.length+(deuxieme?' · 2e chance':'')+'</small></p><h2>'+q.q+'</h2>';
+  if(q.type=='court') h+='<input type="text" id="rep" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" onkeydown="if(event.key==\'Enter\')verifier()">';
+  if(q.type=='qcm') h+='<div class="choix">'+q.choix.map((c,i)=>'<button onclick="choisir(this,'+i+')">'+c+'</button>').join('')+'</div>';
+  if(q.type=='vf') h+='<div class="choix"><button onclick="choisir(this,1)">✔️ Vrai</button><button onclick="choisir(this,0)">❌ Faux</button></div>';
+  if(q.type=='ordre'){ordre=[];const m=q.elements.map((e,i)=>i).sort(()=>Math.random()-.5);
+    h+='<p><small>Touche les éléments dans le bon ordre.</small></p><div id="jetons">'+m.map(i=>'<span class="jeton" onclick="prendre(this,'+i+')">'+q.elements[i]+'</span>').join('')+'</div><p id="ordre" style="min-height:2em;font-weight:bold"></p><button class="gris" onclick="montrer()">↺ Recommencer</button>'}
+  h+='<div id="retour"></div><button id="valider" onclick="verifier()">Vérifier</button></div>';
+  zone.innerHTML=h; const r=document.getElementById('rep'); if(r) r.focus(); choix=null;
+}
+let choix=null, ordre=[];
+function choisir(b,i){document.querySelectorAll('.choix button').forEach(x=>x.classList.remove('choisi'));b.classList.add('choisi');choix=i}
+function prendre(el,i){if(el.classList.contains('pris'))return;el.classList.add('pris');ordre.push(i);
+  document.getElementById('ordre').textContent=ordre.map(k=>Q[file[pos]].elements[k]).join(' → ')}
+function verifier(){
+  const q=Q[file[pos]]; let donnee, ok;
+  let presque=false;
+  if(q.type=='court'){donnee=document.getElementById('rep').value;if(!donnee.trim())return;ok=juste(q,donnee);if(ok=='presque'){presque=true;ok=true}}
+  if(q.type=='qcm'){if(choix===null)return;donnee=q.choix[choix];ok=choix==q.bonne}
+  if(q.type=='vf'){if(choix===null)return;donnee=choix?'vrai':'faux';ok=(choix==1)==q.bonne}
+  if(q.type=='ordre'){if(ordre.length<q.elements.length)return;donnee=ordre.map(k=>q.elements[k]).join(' / ');ok=ordre.every((k,i)=>k==i)}
+  const bonne=q.type=='court'?q.reponses[0]:q.type=='qcm'?q.choix[q.bonne]:q.type=='vf'?(q.bonne?'vrai':'faux'):q.elements.join(' / ');
+  if(ok&&!deuxieme)points++; if(!ok&&!deuxieme)rates.push(file[pos]);
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'quiz',question:q.q.replace(/<[^>]+>/g,''),
+    reponse:donnee,bonne:bonne,correct:presque?'presque (orthographe)':ok?'oui':'non',notion:q.notion||''});
+  document.getElementById('retour').innerHTML='<h3 class="'+(ok?'ok':'ko')+'">'+(presque?'✅ Presque ! Attention à l\'orthographe : on écrit <u>'+bonne+'</u>':ok?'✅ Bravo !':'❌ Pas tout à fait… La bonne réponse : '+bonne)+'</h3><div class="expl">💡 '+q.explication+'</div>';
+  const v=document.getElementById('valider'); v.textContent='Question suivante ➜'; v.onclick=()=>{pos++;montrer()};
+  if(ok) confettis(20);
+}
+function fin(){
+  const n=Math.round(20*points/total), badge=n>=18?'🏆 Champion !':n>=14?'🥇 Très bien !':n>=10?'🥈 Bien, continue !':'💪 On s\'entraîne encore !';
+  zone.innerHTML='<div class="carte" id="fin"><p class="gros">'+badge.split(' ')[0]+'</p><h2>'+badge.slice(3)+'</h2><p>Du premier coup : <b>'+points+' / '+total+'</b> (soit '+n+' / 20)</p><p>Refais ce quiz dans 3 jours : c\'est en se testant plusieurs fois qu\'on retient pour de bon.</p><button onclick="location.reload()">Recommencer</button></div>';
+  confettis(n*6); prog();
+}
+function confettis(n){for(let i=0;i<n;i++){const c=document.createElement('div');c.textContent=['🎉','⭐','✨','🎊'][i%4];
+  c.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:24px;transition:transform 2.2s ease-in,opacity 2.2s;z-index:9';
+  document.body.appendChild(c);requestAnimationFrame(()=>{c.style.transform='translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*720-360)+'deg)';c.style.opacity=.2});
+  setTimeout(()=>c.remove(),2300)}}
+montrer();
+</script></body></html>
