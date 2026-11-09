@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flashcards – Histoire - La révolution néolithique</title><style>:root{--c:#8a5a2b}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – Histoire - La révolution néolithique</h1><p>Histoire-Géo-EMC · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Quelles sont les dates du Néolithique ?", "r": "Le Néolithique va de −10 000 jusque vers −3500.", "notion": "dates du Néolithique"}, {"q": "Où et quand apparaissent l'agriculture et l'élevage ?", "r": "Ils apparaissent au Proche-Orient, entre 10 000 et 9 000 avant notre ère.", "notion": "naissance de l'agriculture"}, {"q": "À partir de quand l'agriculture et l'élevage se diffusent-ils ?", "r": "Ils se diffusent à partir de −6500, vers la Turquie puis l'Europe.", "notion": "diffusion de l'agriculture"}, {"q": "Qu'est-ce que l'agriculture ?", "r": "L'agriculture, c'est cultiver la terre pour produire sa nourriture, par exemple des céréales.", "notion": "agriculture"}, {"q": "Qu'est-ce que l'élevage ?", "r": "L'élevage, c'est domestiquer des animaux et s'en occuper pour avoir de la viande, du lait ou de la laine.", "notion": "élevage"}, {"q": "Quels animaux les hommes du Néolithique domestiquent-ils ?", "r": "Ils domestiquent le chien en premier, puis le mouton, la chèvre, le porc et le bœuf.", "notion": "domestication"}, {"q": "Que veut dire « sédentaire » ?", "r": "Un sédentaire vit toujours au même endroit, dans une maison. Le contraire de sédentaire est nomade.", "notion": "sédentaire / nomade"}, {"q": "Les hommes du Paléolithique sont-ils nomades ou sédentaires ?", "r": "Ils sont nomades : ils n'ont pas d'habitat fixe. Les hommes du Néolithique, eux, sont sédentaires.", "notion": "sédentaire / nomade"}, {"q": "Que provoque la sédentarisation ?", "r": "La sédentarisation provoque la création des premiers villages.", "notion": "premiers villages"}, {"q": "Cite deux autres foyers de l'agriculture que le Proche-Orient.", "r": "La Nouvelle-Guinée (la banane et le taro) et la vallée du Mississippi, en Amérique (la courge et le tournesol).", "notion": "foyers de l'agriculture"}, {"q": "Décris l'habitat du village de Jerf el-Ahmar (Syrie, vers −9500).", "r": "À Jerf el-Ahmar, les maisons sont en pierre et elles sont enterrées.", "notion": "villages néolithiques"}, {"q": "Décris l'habitat des villages de Chalain et de Charavines (France).", "r": "Ce sont des maisons en bois (et en paille) construites sur pilotis, au bord d'un lac.", "notion": "villages néolithiques"}, {"q": "À quoi servent une meule et une faucille ?", "r": "La meule sert à moudre les céréales. La faucille sert à couper le blé.", "notion": "nouveaux outils"}, {"q": "Qu'est-ce qu'un menhir ?", "r": "Un menhir est une grande pierre dressée.", "notion": "croyances"}, {"q": "Qu'est-ce qu'un tumulus ?", "r": "Un tumulus est une tombe recouverte de terre.", "notion": "croyances"}, {"q": "Quelles nouvelles croyances apparaissent au Néolithique ?", "r": "Les hommes réfléchissent sur la mort, les premières formes de religion apparaissent, et ils construisent des menhirs et des tumulus.", "notion": "croyances"}, {"q": "Comment les hommes du Néolithique transforment-ils l'environnement ?", "r": "Ils défrichent : ils abattent les forêts avec la hache et le feu pour faire des champs.", "notion": "nouvelle société"}, {"q": "Qu'est-ce que le troc ?", "r": "Le troc, c'est échanger un objet contre un autre objet, sans argent.", "notion": "nouvelle société"}, {"q": "Cite deux changements dans la société du Néolithique.", "r": "Des inégalités apparaissent entre les hommes, et les premières règles pour vivre ensemble apparaissent.", "notion": "nouvelle société"}, {"q": "Quelle est la nature de l'image de Cuiry-lès-Chaudardes ?", "r": "C'est un dessin de reconstitution : il est fait aujourd'hui pour montrer à quoi ressemblait le village vers −4000.", "notion": "présenter une image"}], MATIERE = "Histoire-Géo-EMC", LECON = "Histoire - La révolution néolithique", LECON_ID = "histoire-geo-emc-histoire-la-revolution-neolithique", CLE = 'elouan_cartes_' + LECON_ID;
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // n° carte -> {ecart, du, t}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// Calendrier partagé entre les appareils (maison / école) via le Google Sheet : la note la plus récente gagne
+async function charger(){
+  if(!ENDPOINT) return;
+  try{ const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch(ENDPOINT + '?cle=' + encodeURIComponent(CLE_SITE) + '&lecon=' + encodeURIComponent(LECON_ID), {signal: ctl.signal});
+    const d = await r.json();
+    for(const k in d) if(C[k] && (!etat[k] || (etat[k].t||0) < (d[k].t||0))) etat[k] = d[k];
+    sauver();
+  }catch(e){}   // pas de réseau : on garde le calendrier de l'appareil
+}
+function pousser(cartes){
+  if(!ENDPOINT || !Object.keys(cartes).length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({cle: CLE_SITE, calendrier: {lecon: LECON_ID, cartes: cartes}})}).catch(()=>{});
+}
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = [], faites = 0, total = 0, bilan = {su:0, moitie:0, pas:0};
+const zone = document.getElementById('zone');
+function demarrer(){
+  // cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+  let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+  const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+  file = dues.slice(); total = file.length;
+  document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+  montrer();
+  pousser(etat);   // ce qui a été fait hors connexion rejoint le calendrier partagé
+}
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; e.t = Date.now(); etat[i] = e; sauver(); pousser({[i]: e});
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro, sur tous les appareils ?\'))remiseAZero()">Remettre à zéro</button></div>';
+}
+function remiseAZero(){
+  const t = Date.now(); etat = {}; C.forEach((c,i)=>etat[i] = {ecart: 0, du: 0, t: t}); sauver(); pousser(etat);
+  setTimeout(()=>location.reload(), 1500);
+}
+zone.innerHTML = '<div class="carte">⏳ Je récupère tes cartes…</div>';
+charger().then(demarrer);
+</script></body></html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Quiz – Histoire - Premiers États, premières écritures (début)</title><style>:root{--c:#8a5a2b}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.choix button{display:block;width:100%;text-align:left;background:#eef;color:#222;border:2px solid #ccd}
+.choix button.choisi{border-color:var(--c);background:#dde}
+.jeton{display:inline-block;background:#eef;border:2px solid #ccd;border-radius:10px;padding:8px 12px;margin:4px;cursor:pointer}
+.jeton.pris{opacity:.3} #fin{text-align:center} .gros{font-size:3em;margin:0}
+</style></head><body>
+<header><h1>🧠 Quiz – Histoire - Premiers États, premières écritures (début)</h1><p>Histoire-Géo-EMC · écris ta réponse, puis vérifie. Pas de stress : chaque erreur t'apprend quelque chose !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><div id="zone"></div></main>
+<script>
+const Q = [{"type": "court", "q": "En quelle année l'écriture naît-elle ? (n'oublie pas le signe)", "reponses": ["-3300", "−3300", "-3 300", "−3 300", "3300 avant jc", "3300 av jc", "3300 avant notre ere"], "explication": "L'écriture naît vers −3300, en Mésopotamie. Le signe moins veut dire « avant notre ère ».", "notion": "repères"}, {"type": "court", "q": "Comment s'appelle l'écriture de la Mésopotamie, faite de traits en forme de clous ?", "reponses": ["cuneiforme", "l'ecriture cuneiforme", "ecriture cuneiforme"], "tolerance": true, "explication": "C'est l'écriture cunéiforme, tracée sur des tablettes d'argile. Les hiéroglyphes, eux, sont égyptiens.", "notion": "écritures"}, {"type": "court", "q": "Comment s'appellent les signes de l'écriture égyptienne ?", "reponses": ["hieroglyphes", "les hieroglyphes", "hieroglyphe", "des hieroglyphes"], "tolerance": true, "explication": "Ce sont les hiéroglyphes ; les premiers apparaissent vers −3200. L'écriture cunéiforme n'est pas égyptienne : elle est mésopotamienne.", "notion": "écritures"}, {"type": "court", "q": "Entre quels deux fleuves se trouve la Mésopotamie ?", "reponses": ["le Tigre et l'Euphrate", "Tigre et Euphrate", "l'Euphrate et le Tigre", "Euphrate et Tigre"], "contient": ["tigre", "euphrate"], "explication": "La Mésopotamie est entre le Tigre et l'Euphrate : son nom veut dire « le pays entre les fleuves ». Le Nil est en Égypte.", "notion": "fleuves"}, {"type": "court", "q": "Comment appelle-t-on le roi de l'Égypte ancienne ?", "reponses": ["pharaon", "le pharaon", "un pharaon"], "tolerance": true, "explication": "C'est le pharaon. Son tombeau est une pyramide.", "notion": "vocabulaire"}, {"type": "court", "q": "Comment appelle-t-on une personne qui croit en plusieurs dieux ?", "reponses": ["polytheiste", "un polytheiste"], "tolerance": true, "explication": "Elle est polythéiste : « poly » veut dire plusieurs, et « théiste » vient du mot grec qui veut dire dieu.", "notion": "vocabulaire"}, {"type": "court", "q": "Qui est le roi de Mari ?", "reponses": ["Yahdun-Lim", "Yahdun Lim", "yahdunlim"], "tolerance": true, "explication": "C'est Yahdun-Lim. Selon la légende, le dieu Dagan lui a confié le pouvoir.", "notion": "Mari"}, {"type": "court", "q": "Selon la légende, quel dieu a confié le pouvoir à Yahdun-Lim ?", "reponses": ["Dagan", "le dieu Dagan"], "tolerance": true, "explication": "C'est le dieu Dagan. Le roi dit tenir son pouvoir d'un dieu : c'est une façon de faire accepter son autorité.", "notion": "Mari"}, {"type": "qcm", "q": "À quoi sert le canal d'irrigation de Mari ?", "choix": ["à protéger la ville", "à apporter l'eau aux champs pour les arroser", "à honorer les dieux"], "bonne": 1, "explication": "Le canal d'irrigation apporte l'eau aux champs. Le rempart protège la ville, et le temple sert à honorer les dieux.", "notion": "Mari"}, {"type": "vf", "q": "Vrai ou faux : l'Égypte se trouve entre le Tigre et l'Euphrate.", "bonne": false, "explication": "C'est faux. C'est la Mésopotamie qui est entre le Tigre et l'Euphrate. L'Égypte vit le long d'un seul fleuve : le Nil.", "notion": "fleuves"}], MATIERE = "Histoire-Géo-EMC", LECON = "Histoire - Premiers États, premières écritures (début)";
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+function vider() {
+  if (!ENDPOINT) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
+    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+}
+vider();
+
+function norm(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[.,;:!?'’"«»()\-]/g,' ').replace(/\s+/g,' ').trim()}
+function lev(a,b){const d=[...Array(a.length+1)].map((_,i)=>[i]);for(let j=1;j<=b.length;j++)d[0][j]=j;
+ for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]==b[j-1]?0:1));return d[a.length][b.length]}
+function juste(q,rep){const r=norm(rep);if(!r)return false;
+  if(q.contient){const m=' '+r+' ';return q.contient.every(k=>k.split('|').some(v=>m.includes(norm(v))))&&!(q.exclut||[]).some(k=>m.includes(norm(k)))}
+  if(q.reponses.some(b=>norm(b)==r))return true;
+  const proche=q.tolerance&&q.reponses.find(b=>{b=norm(b);return b.length>=5&&lev(r,b)<=1});
+  return proche?'presque':false}
+let file=Q.map((q,i)=>i), pos=0, points=0, rates=[], deuxieme=false, total=Q.length;
+const zone=document.getElementById('zone');
+function prog(){document.getElementById('prog').style.width=(100*Math.min(pos,file.length)/file.length)+'%'}
+function montrer(){
+  prog(); if(pos>=file.length){ if(!deuxieme&&rates.length){deuxieme=true;file=rates;rates=[];pos=0;
+      zone.innerHTML='<div class="carte"><h2>🔁 2e chance !</h2><p>On reprend les questions ratées. Relis bien les explications dans ta tête avant de répondre.</p><button onclick="montrer()">C\'est parti</button></div>';return}
+    return fin()}
+  const q=Q[file[pos]]; let h='<div class="carte"><p><small>Question '+(pos+1)+' / '+file.length+(deuxieme?' · 2e chance':'')+'</small></p><h2>'+q.q+'</h2>';
+  if(q.type=='court') h+='<input type="text" id="rep" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" onkeydown="if(event.key==\'Enter\')verifier()">';
+  if(q.type=='qcm') h+='<div class="choix">'+q.choix.map((c,i)=>'<button onclick="choisir(this,'+i+')">'+c+'</button>').join('')+'</div>';
+  if(q.type=='vf') h+='<div class="choix"><button onclick="choisir(this,1)">✔️ Vrai</button><button onclick="choisir(this,0)">❌ Faux</button></div>';
+  if(q.type=='ordre'){ordre=[];const m=q.elements.map((e,i)=>i).sort(()=>Math.random()-.5);
+    h+='<p><small>Touche les éléments dans le bon ordre.</small></p><div id="jetons">'+m.map(i=>'<span class="jeton" onclick="prendre(this,'+i+')">'+q.elements[i]+'</span>').join('')+'</div><p id="ordre" style="min-height:2em;font-weight:bold"></p><button class="gris" onclick="montrer()">↺ Recommencer</button>'}
+  h+='<div id="retour"></div><button id="valider" onclick="verifier()">Vérifier</button></div>';
+  zone.innerHTML=h; const r=document.getElementById('rep'); if(r) r.focus(); choix=null;
+}
+let choix=null, ordre=[];
+function choisir(b,i){document.querySelectorAll('.choix button').forEach(x=>x.classList.remove('choisi'));b.classList.add('choisi');choix=i}
+function prendre(el,i){if(el.classList.contains('pris'))return;el.classList.add('pris');ordre.push(i);
+  document.getElementById('ordre').textContent=ordre.map(k=>Q[file[pos]].elements[k]).join(' → ')}
+function verifier(){
+  const q=Q[file[pos]]; let donnee, ok;
+  let presque=false;
+  if(q.type=='court'){donnee=document.getElementById('rep').value;if(!donnee.trim())return;ok=juste(q,donnee);if(ok=='presque'){presque=true;ok=true}}
+  if(q.type=='qcm'){if(choix===null)return;donnee=q.choix[choix];ok=choix==q.bonne}
+  if(q.type=='vf'){if(choix===null)return;donnee=choix?'vrai':'faux';ok=(choix==1)==q.bonne}
+  if(q.type=='ordre'){if(ordre.length<q.elements.length)return;donnee=ordre.map(k=>q.elements[k]).join(' / ');ok=ordre.every((k,i)=>k==i)}
+  const bonne=q.type=='court'?q.reponses[0]:q.type=='qcm'?q.choix[q.bonne]:q.type=='vf'?(q.bonne?'vrai':'faux'):q.elements.join(' / ');
+  if(ok&&!deuxieme)points++; if(!ok&&!deuxieme)rates.push(file[pos]);
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'quiz',question:q.q.replace(/<[^>]+>/g,''),
+    reponse:donnee,bonne:bonne,correct:presque?'presque (orthographe)':ok?'oui':'non',notion:q.notion||''});
+  document.getElementById('retour').innerHTML='<h3 class="'+(ok?'ok':'ko')+'">'+(presque?'✅ Presque ! Attention à l\'orthographe : on écrit <u>'+bonne+'</u>':ok?'✅ Bravo !':'❌ Pas tout à fait… La bonne réponse : '+bonne)+'</h3><div class="expl">💡 '+q.explication+'</div>';
+  const v=document.getElementById('valider'); v.textContent='Question suivante ➜'; v.onclick=()=>{pos++;montrer()};
+  if(ok) confettis(20);
+}
+function fin(){
+  const n=Math.round(20*points/total), badge=n>=18?'🏆 Champion !':n>=14?'🥇 Très bien !':n>=10?'🥈 Bien, continue !':'💪 On s\'entraîne encore !';
+  zone.innerHTML='<div class="carte" id="fin"><p class="gros">'+badge.split(' ')[0]+'</p><h2>'+badge.slice(3)+'</h2><p>Du premier coup : <b>'+points+' / '+total+'</b> (soit '+n+' / 20)</p><p>Refais ce quiz dans 3 jours : c\'est en se testant plusieurs fois qu\'on retient pour de bon.</p><button onclick="location.reload()">Recommencer</button></div>';
+  confettis(n*6); prog();
+}
+function confettis(n){for(let i=0;i<n;i++){const c=document.createElement('div');c.textContent=['🎉','⭐','✨','🎊'][i%4];
+  c.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:24px;transition:transform 2.2s ease-in,opacity 2.2s;z-index:9';
+  document.body.appendChild(c);requestAnimationFrame(()=>{c.style.transform='translateY('+(innerHeight+60)+'px) rotate('+(Math.random()*720-360)+'deg)';c.style.opacity=.2});
+  setTimeout(()=>c.remove(),2300)}}
+montrer();
+</script></body></html>
