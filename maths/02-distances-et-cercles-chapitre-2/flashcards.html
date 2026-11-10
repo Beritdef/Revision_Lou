@@ -24,12 +24,19 @@ function envoyer(ligne) {
   const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
   localStorage.setItem(FILE, JSON.stringify(att)); vider();
 }
+// Un seul envoi à la fois (2026-11-10) : avant, chaque envoyer() renvoyait toute la file tant que l'envoi
+// précédent n'était pas confirmé (lignes du contrôle blanc en double jusqu'à 5 fois dans le Sheet), et la remise
+// à zéro de la file effaçait les lignes ajoutées pendant l'envoi. Désormais on ne retire que les lignes envoyées.
+let envoiEnCours = false;
 function vider() {
-  if (!ENDPOINT) return;
+  if (!ENDPOINT || envoiEnCours) return;
   const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  const lot = att.slice(0, 200); envoiEnCours = true;
   fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
-                   body: JSON.stringify({cle: CLE_SITE, lignes: att})})
-    .then(() => localStorage.setItem(FILE, '[]')).catch(() => {});
+                   body: JSON.stringify({cle: CLE_SITE, lignes: lot})})
+    .then(() => { const reste = JSON.parse(localStorage.getItem(FILE) || '[]').slice(lot.length);
+                  localStorage.setItem(FILE, JSON.stringify(reste)); envoiEnCours = false; if (reste.length) vider(); })
+    .catch(() => { envoiEnCours = false; });
 }
 vider();
 
