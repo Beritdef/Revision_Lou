@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flashcards – Présenter une personne</title><style>:root{--c:#c28a00}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – Présenter une personne</h1><p>Allemand · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Présente Jasper en allemand : il s'appelle Jasper, il a 11 ans, il habite à Langen.", "r": "<b>Er heißt Jasper. Er ist elf Jahre alt. Er wohnt in Langen.<\/b><br>Pour un garçon, on utilise <i>er<\/i>, et le verbe prend -t.", "notion": "présenter un garçon"}, {"q": "Présente Moya en allemand : elle s'appelle Moya, elle est en 6F, elle habite à Dreieich.", "r": "<b>Sie heißt Moya. Sie ist in der Klasse 6F. Sie wohnt in Dreieich.<\/b><br>Pour une fille, on utilise <i>sie<\/i>.", "notion": "présenter une fille"}, {"q": "Comment dis-tu en allemand : « Il vient d'Allemagne. » ?", "r": "<b>Er kommt aus Deutschland.<\/b><br>Pour l'origine, on utilise <i>aus<\/i>.", "notion": "Herkunft (aus)"}, {"q": "Comment dis-tu en allemand : « Elle vient de Turquie. » ?", "r": "<b>Sie kommt aus der Türkei.<\/b><br>La Turquie est féminine (die Türkei) : après aus, on dit <b>der<\/b>, pas den.", "notion": "Herkunft (aus der)"}, {"q": "Comment dis-tu en allemand : « Il a douze ans. » ?", "r": "<b>Er ist zwölf Jahre alt.<\/b><br>En allemand, l'âge se dit avec sein (être), pas avec avoir.", "notion": "l'âge avec sein"}, {"q": "Conjugue sein avec ich, du, er / sie.", "r": "<b>ich bin · du bist · er / sie ist<\/b><br>Sein est irrégulier : on ne dit pas « ich bine ».", "notion": "verbe sein"}, {"q": "Conjugue heißen avec ich, du, er / sie.", "r": "<b>ich heiße · du heißt · er / sie heißt<\/b><br>Avec du, seulement -t, car ß vaut déjà deux s.", "notion": "présent de heißen"}, {"q": "Conjugue wohnen avec ich, du, er / sie.", "r": "<b>ich wohne · du wohnst · er / sie wohnt<\/b>", "notion": "présent singulier"}, {"q": "Comment dis-tu « son loisir » pour un garçon ? Et pour une fille ?", "r": "Pour un garçon : <b>sein Hobby<\/b>. Pour une fille, on ne dit pas sein : on dit <b>ihr Hobby<\/b>.", "notion": "sein / ihr"}, {"q": "Comment dis-tu en allemand : « Son loisir (à elle), c'est l'équitation. » ?", "r": "<b>Ihr Hobby ist Reiten.<\/b><br>La personne est une fille, donc <i>ihr<\/i>.", "notion": "sein / ihr"}, {"q": "Comment dis-tu « mon meilleur ami » ? Et « ma meilleure amie » ?", "r": "<b>mein bester Freund<\/b> (un garçon) · <b>meine beste Freundin<\/b> (une fille).", "notion": "bester Freund / beste Freundin"}, {"q": "Traduis : « Mon meilleur ami s'appelle Octave. Son loisir, c'est le foot. »", "r": "<b>Mein bester Freund heißt Octave. Sein Hobby ist Fußball.<\/b>", "notion": "présenter son meilleur ami"}, {"q": "Que veulent dire Wer ? et Wie ?", "r": "<b>Wer?<\/b> = qui ? <b>Wie?<\/b> ne veut pas dire qui : il veut dire <b>comment ?<\/b>", "notion": "mots interrogatifs"}, {"q": "Que veulent dire Wo ? et Woher ? Comment s'écrit Woher ?", "r": "<b>Wo?<\/b> = où ? (la ville où on habite, réponse avec in). <b>Woher?<\/b> = d'où ? (réponse avec aus). Il s'écrit <b>W-O-H-E-R<\/b>, sans n : pas « wohner ».", "notion": "wo / woher"}, {"q": "Que veulent dire Was ? et Wie alt ?", "r": "<b>Was?<\/b> = quoi ? quel ? (Was ist dein Hobby?) · <b>Wie alt?<\/b> = quel âge ?", "notion": "mots interrogatifs"}, {"q": "Demande en allemand : « D'où vient Tina ? »", "r": "<b>Woher kommt Tina?<\/b><br>Mot interrogatif, puis le verbe en 2e position, puis le sujet.", "notion": "question en W"}, {"q": "Demande en allemand : « Comment s'appelle ta meilleure amie ? »", "r": "<b>Wie heißt deine beste Freundin?<\/b>", "notion": "question en W"}, {"q": "Demande en allemand : « Où habite ton meilleur ami ? »", "r": "<b>Wo wohnt dein bester Freund?<\/b>", "notion": "question en W"}, {"q": "Demande en allemand : « Quel âge a ton frère ? »", "r": "<b>Wie alt ist dein Bruder?<\/b>", "notion": "question en W"}, {"q": "Dans une question en W, à quelle place se trouve le verbe conjugué ?", "r": "Le verbe conjugué est toujours en <b>2<sup>e<\/sup> position<\/b>, juste après le mot interrogatif, et avant le sujet.", "notion": "ordre des mots"}, {"q": "Dis en allemand : « Il est sportif et actif. »", "r": "<b>Er ist sportlich und aktiv.<\/b>", "notion": "Persönlichkeit"}, {"q": "Que veulent dire lustig, ruhig, klug et faul ?", "r": "<b>lustig<\/b> = drôle · <b>ruhig<\/b> = calme · <b>klug<\/b> = intelligent · <b>faul<\/b> = paresseux.", "notion": "Persönlichkeit"}, {"q": "Que veulent dire kreativ, modisch et abenteuerlustig ?", "r": "<b>kreativ<\/b> = créatif · <b>modisch<\/b> = à la mode · <b>abenteuerlustig<\/b> = qui aime l'aventure.", "notion": "Persönlichkeit"}, {"q": "Que veulent dire reiten, malen, lesen et wandern ?", "r": "<b>reiten<\/b> = faire du cheval · <b>malen<\/b> = peindre · <b>lesen<\/b> = lire · <b>wandern<\/b> = randonner.", "notion": "Hobbys"}, {"q": "Que veulent dire der Vorname, das Alter, der Wohnort et die Herkunft ?", "r": "<b>der Vorname<\/b> = le prénom · <b>das Alter<\/b> = l'âge · <b>der Wohnort<\/b> = le lieu où on habite · <b>die Herkunft<\/b> = l'origine (d'où on vient).", "notion": "Steckbrief"}], MATIERE = "Allemand", LECON = "Présenter une personne", LECON_ID = "allemand-presenter-une-personne", CLE = 'elouan_cartes_' + LECON_ID;
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+// Un seul envoi à la fois (2026-11-10) : avant, chaque envoyer() renvoyait toute la file tant que l'envoi
+// précédent n'était pas confirmé (lignes du contrôle blanc en double jusqu'à 5 fois dans le Sheet), et la remise
+// à zéro de la file effaçait les lignes ajoutées pendant l'envoi. Désormais on ne retire que les lignes envoyées.
+let envoiEnCours = false;
+function vider() {
+  if (!ENDPOINT || envoiEnCours) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  const lot = att.slice(0, 200); envoiEnCours = true;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: lot})})
+    .then(() => { const reste = JSON.parse(localStorage.getItem(FILE) || '[]').slice(lot.length);
+                  localStorage.setItem(FILE, JSON.stringify(reste)); envoiEnCours = false; if (reste.length) vider(); })
+    .catch(() => { envoiEnCours = false; });
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // n° carte -> {ecart, du, t}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// Calendrier partagé entre les appareils (maison / école) via le Google Sheet : la note la plus récente gagne
+async function charger(){
+  if(!ENDPOINT) return;
+  try{ const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch(ENDPOINT + '?cle=' + encodeURIComponent(CLE_SITE) + '&lecon=' + encodeURIComponent(LECON_ID), {signal: ctl.signal});
+    const d = await r.json();
+    for(const k in d) if(C[k] && (!etat[k] || (etat[k].t||0) < (d[k].t||0))) etat[k] = d[k];
+    sauver();
+  }catch(e){}   // pas de réseau : on garde le calendrier de l'appareil
+}
+function pousser(cartes){
+  if(!ENDPOINT || !Object.keys(cartes).length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({cle: CLE_SITE, calendrier: {lecon: LECON_ID, cartes: cartes}})}).catch(()=>{});
+}
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = [], faites = 0, total = 0, bilan = {su:0, moitie:0, pas:0};
+const zone = document.getElementById('zone');
+function demarrer(){
+  // cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+  let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+  const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+  file = dues.slice(); total = file.length;
+  document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+  montrer();
+  pousser(etat);   // ce qui a été fait hors connexion rejoint le calendrier partagé
+}
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; e.t = Date.now(); etat[i] = e; sauver(); pousser({[i]: e});
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro, sur tous les appareils ?\'))remiseAZero()">Remettre à zéro</button></div>';
+}
+function remiseAZero(){
+  const t = Date.now(); etat = {}; C.forEach((c,i)=>etat[i] = {ecart: 0, du: 0, t: t}); sauver(); pousser(etat);
+  setTimeout(()=>location.reload(), 1500);
+}
+zone.innerHTML = '<div class="carte">⏳ Je récupère tes cartes…</div>';
+charger().then(demarrer);
+</script></body></html>
