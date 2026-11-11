@@ -1,0 +1,114 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Flashcards – Le conte et l&#x27;incipit (La Belle et la Bête)</title><style>:root{--c:#b3412f}
+*{box-sizing:border-box} body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f6f3ea;color:#222}
+header{background:var(--c);color:#fff;padding:14px 18px} header h1{margin:0;font-size:1.3em} header p{margin:4px 0 0;opacity:.9}
+main{max-width:720px;margin:0 auto;padding:16px}
+.carte{background:#fff;border-radius:16px;box-shadow:0 3px 10px #0002;padding:20px;margin:12px 0}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;margin:6px 4px 0 0;cursor:pointer;background:var(--c);color:#fff}
+button.gris{background:#888} button:disabled{opacity:.4}
+textarea,input[type=text]{width:100%;font:inherit;font-size:1.1em;padding:10px;border:2px solid #ccc;border-radius:10px}
+.barre{height:10px;background:#ddd;border-radius:5px;overflow:hidden} .barre div{height:100%;background:var(--c);transition:width .3s}
+.ok{color:#1b7f3b} .ko{color:#c5221f} .expl{background:#fff8dc;border-left:5px solid #e0b000;padding:10px 12px;border-radius:8px;margin-top:10px}
+
+.recto{font-size:1.35em;font-weight:600;min-height:3em} .verso{border-top:3px dashed #ddd;margin-top:14px;padding-top:12px;font-size:1.2em}
+.note button{flex:1;min-width:30%} .note{display:flex;gap:6px;flex-wrap:wrap} .su{background:#1b7f3b}.moitie{background:#e09000}.pas{background:#c5221f}
+.ta{color:#555;font-style:italic} .info{color:#666;font-size:.9em}
+</style></head><body>
+<header><h1>🃏 Flashcards – Le conte et l&#x27;incipit (La Belle et la Bête)</h1><p>Français · réponds <b>avant</b> de retourner la carte (à voix haute ou en écrivant), puis sois honnête avec toi-même !</p></header>
+<main><div class="barre"><div id="prog" style="width:0"></div></div><p class="info" id="info"></p><div id="zone"></div></main>
+<script>
+const C = [{"q": "Qu'est-ce qu'un conte ? Donne la définition du cahier.", "r": "Le conte raconte une <b>histoire courte<\/b> qui commence souvent par <b>« Il était une fois »<\/b>. Son cadre (temps et lieu) est <b>indéterminé<\/b>, et la <b>magie<\/b> et les <b>créatures extraordinaires<\/b> y ont une grande place.", "notion": "définition du conte"}, {"q": "Cite les 5 caractéristiques du conte.", "r": "1. Une histoire courte. 2. Une formule de début (« Il était une fois »). 3. Un cadre indéterminé. 4. Des créatures extraordinaires. 5. La magie (lieux, objets, événements magiques).", "notion": "caractéristiques du conte"}, {"q": "Par quelle formule commence souvent un conte ?", "r": "Un conte commence souvent par <b>« Il était une fois »<\/b> (ou « Il y avait une fois », comme dans <i>La Belle et la Bête<\/i>).", "notion": "formule du conte"}, {"q": "Que veut dire « un cadre indéterminé » ?", "r": "Un cadre indéterminé est un cadre <b>non précisé<\/b> : on ne sait pas à quelle <b>époque<\/b> (temps) ni dans quel <b>lieu<\/b> se passe l'histoire.", "notion": "cadre indéterminé"}, {"q": "Comment les humains d'un conte réagissent-ils quand ils rencontrent une créature extraordinaire ?", "r": "Les humains ne sont <b>pas surpris<\/b> : dans un conte, ils côtoient les créatures extraordinaires <b>sans surprise<\/b>, comme si c'était normal.", "notion": "créatures extraordinaires"}, {"q": "Cite les trois sortes de magie qu'on trouve dans un conte.", "r": "On trouve des <b>lieux magiques<\/b>, des <b>objets magiques<\/b> et des <b>événements surnaturels<\/b>.", "notion": "la magie dans le conte"}, {"q": "Qu'est-ce qu'un incipit ?", "r": "L'incipit est le <b>début<\/b> d'un récit : le premier texte, celui qui présente la <b>situation de départ<\/b>.", "notion": "incipit"}, {"q": "D'où vient le mot « incipit » et que veut-il dire ?", "r": "Le mot incipit vient du verbe latin <b><i>incipere<\/i><\/b>, qui signifie <b>commencer<\/b>.", "notion": "incipit"}, {"q": "Quelle est la fonction de l'incipit ?", "r": "La fonction de l'incipit est de <b>séduire le lecteur<\/b> pour qu'il <b>poursuive sa lecture<\/b> (qu'il ait envie de lire la suite).", "notion": "fonction de l'incipit"}, {"q": "Grâce à quels deux points l'incipit donne-t-il envie de lire la suite ?", "r": "1. Le texte précise le <b>cadre spatio-temporel<\/b> (le lieu et le temps). 2. Le texte présente les <b>personnages<\/b> et leurs <b>relations<\/b>.", "notion": "fonction de l'incipit"}, {"q": "Que veut dire « spatio-temporel » ?", "r": "<b>Spatio<\/b> parle de l'<b>espace<\/b>, donc du lieu. <b>Temporel<\/b> parle du <b>temps<\/b>, donc de l'époque ou du moment. Le cadre spatio-temporel, c'est le lieu et le temps de l'histoire.", "notion": "cadre spatio-temporel"}, {"q": "Sur quels deux aspects se fait un portrait en littérature ?", "r": "Un portrait se fait sur l'<b>aspect physique<\/b> (l'apparence du personnage) et sur l'<b>aspect moral<\/b> (son caractère).", "notion": "portrait physique et moral"}, {"q": "« Elle est blonde et grande » : est-ce un portrait physique ou moral ? Et « elle est généreuse » ?", "r": "« Elle est blonde et grande » est un portrait <b>physique<\/b>, parce que cela décrit l'apparence. « Elle est généreuse » n'est pas physique : c'est un portrait <b>moral<\/b>, parce que cela décrit le caractère.", "notion": "portrait physique et moral"}, {"q": "Dans l'incipit de La Belle et la Bête, qui sont les personnages et quels sont leurs liens de parenté ?", "r": "Il y a un <b>marchand<\/b> très riche et ses <b>six enfants<\/b> : <b>trois garçons<\/b> et <b>trois filles<\/b>. La Belle est la plus jeune des filles.", "notion": "personnages de La Belle et la Bête"}, {"q": "La Belle est-elle l'aînée ou la cadette ? Que veut dire ce mot ?", "r": "La Belle est la <b>cadette<\/b> : c'est la plus <b>jeune<\/b>. L'aînée, au contraire, est la plus âgée.", "notion": "personnages de La Belle et la Bête"}, {"q": "Pourquoi la Belle s'appelle-t-elle « la Belle » ?", "r": "Quand elle était petite, on l'appelait <b>« la belle enfant »<\/b>, et ce nom lui est resté.", "notion": "personnages de La Belle et la Bête"}, {"q": "Fais le portrait moral de la Belle, avec une preuve du texte.", "r": "La Belle est <b>travailleuse<\/b> et elle s'intéresse aux choses <b>intellectuelles<\/b> : en effet, le texte dit qu'elle emploie son temps à « lire de bons livres ». Elle est aussi <b>généreuse<\/b> : elle veut tenir compagnie à son père.", "notion": "portrait de la Belle"}, {"q": "Fais le portrait moral des deux sœurs, avec une preuve du texte.", "r": "Les sœurs sont <b>orgueilleuses<\/b> et <b>snobs<\/b> : en effet, le texte dit qu'elles « faisaient les dames » et qu'il leur fallait « des gens de qualité ». Elles veulent épouser un duc ou un comte.", "notion": "portrait des sœurs"}, {"q": "Que déduit-on en comparant la Belle et ses sœurs ?", "r": "On en déduit que la Belle est <b>humble<\/b> alors que ses sœurs sont <b>orgueilleuses<\/b>.", "notion": "portrait des sœurs"}, {"q": "Pourquoi les sœurs refusent-elles les marchands qui veulent les épouser ?", "r": "Les sœurs refusent parce qu'elles veulent un <b>titre de noblesse<\/b> : elles ne veulent se marier qu'avec un <b>duc<\/b> ou au moins un <b>comte<\/b>.", "notion": "portrait des sœurs"}, {"q": "Comment répond-on à une question de compréhension ?", "r": "On <b>répond<\/b> par une phrase complète, puis on <b>justifie<\/b> avec le texte : « En effet, le texte dit que… », ou quelques mots du texte <b>entre guillemets<\/b>.", "notion": "méthode de compréhension"}, {"q": "Dans La Clé d'or (Grimm), qu'est-ce qui montre que le cadre est indéterminé ?", "r": "Le texte dit seulement « <b>Par un jour d'hiver<\/b> » : on ne sait pas quelle année, et on ne sait pas dans quel pays ni dans quelle ville se passe l'histoire.", "notion": "cadre indéterminé"}, {"q": "Dans La Clé d'or, que trouve le garçon, et dans quel ordre ?", "r": "Le garçon trouve d'abord une <b>petite clé d'or<\/b> en balayant la neige. Puis il creuse la terre et trouve une <b>cassette de fer<\/b>, où il pense trouver des choses précieuses.", "notion": "La Clé d'or"}, {"q": "Dans Le Conte des trois frères (Harry Potter), quel élément est magique et quel quatrième personnage apparaît ?", "r": "Les trois frères construisent un pont à l'aide d'une <b>baguette magique<\/b>. Le quatrième personnage est <b>la Mort<\/b>, qui est <b>personnifiée<\/b> (elle devient un vrai personnage).", "notion": "caractéristiques du conte"}, {"q": "Quelle est la problématique de la séquence sur La Belle et la Bête ?", "r": "La problématique est : <b>comment la Bête se situe-t-elle aux limites de l'humain ?<\/b> On cherche si la Bête est un monstre ou si elle est un peu humaine.", "notion": "problématique de la séquence"}], MATIERE = "Français", LECON = "Le conte et l'incipit (La Belle et la Bête)", LECON_ID = "francais-le-conte-et-l-incipit-la-belle-et-la-bete", CLE = 'elouan_cartes_' + LECON_ID;
+
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxV2UiqgRKyZ1Aq2PlmCBTIhF8Ixk4UIr3Sd-E8LU1rBmNyeLcGWWKrDb95CZeVf_MT/exec", CLE_SITE = "elouan-6e-2026", FILE = 'elouan_envois_en_attente';
+function envoyer(ligne) {
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); att.push(ligne);
+  localStorage.setItem(FILE, JSON.stringify(att)); vider();
+}
+// Un seul envoi à la fois (2026-11-10) : avant, chaque envoyer() renvoyait toute la file tant que l'envoi
+// précédent n'était pas confirmé (lignes du contrôle blanc en double jusqu'à 5 fois dans le Sheet), et la remise
+// à zéro de la file effaçait les lignes ajoutées pendant l'envoi. Désormais on ne retire que les lignes envoyées.
+let envoiEnCours = false;
+function vider() {
+  if (!ENDPOINT || envoiEnCours) return;
+  const att = JSON.parse(localStorage.getItem(FILE) || '[]'); if (!att.length) return;
+  const lot = att.slice(0, 200); envoiEnCours = true;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+                   body: JSON.stringify({cle: CLE_SITE, lignes: lot})})
+    .then(() => { const reste = JSON.parse(localStorage.getItem(FILE) || '[]').slice(lot.length);
+                  localStorage.setItem(FILE, JSON.stringify(reste)); envoiEnCours = false; if (reste.length) vider(); })
+    .catch(() => { envoiEnCours = false; });
+}
+vider();
+
+const JOUR = 864e5, auj = Math.floor(Date.now() / JOUR);
+let etat = JSON.parse(localStorage.getItem(CLE) || '{}');      // n° carte -> {ecart, du, t}
+function sauver(){localStorage.setItem(CLE, JSON.stringify(etat))}
+// Calendrier partagé entre les appareils (maison / école) via le Google Sheet : la note la plus récente gagne
+async function charger(){
+  if(!ENDPOINT) return;
+  try{ const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch(ENDPOINT + '?cle=' + encodeURIComponent(CLE_SITE) + '&lecon=' + encodeURIComponent(LECON_ID), {signal: ctl.signal});
+    const d = await r.json();
+    for(const k in d) if(C[k] && (!etat[k] || (etat[k].t||0) < (d[k].t||0))) etat[k] = d[k];
+    sauver();
+  }catch(e){}   // pas de réseau : on garde le calendrier de l'appareil
+}
+function pousser(cartes){
+  if(!ENDPOINT || !Object.keys(cartes).length) return;
+  fetch(ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain'},
+    body: JSON.stringify({cle: CLE_SITE, calendrier: {lecon: LECON_ID, cartes: cartes}})}).catch(()=>{});
+}
+const ECARTS = [3, 7, 14, 30], vues = {};
+let file = [], faites = 0, total = 0, bilan = {su:0, moitie:0, pas:0};
+const zone = document.getElementById('zone');
+function demarrer(){
+  // cartes dues (jamais vues ou date atteinte), les plus en retard d'abord ; sinon toutes (séance libre)
+  let dues = C.map((c,i)=>i).filter(i=>!etat[i]||etat[i].du<=auj).sort((a,b)=>((etat[a]||{du:0}).du)-((etat[b]||{du:0}).du));
+  const libre = !dues.length; if(libre) dues = C.map((c,i)=>i).sort(()=>Math.random()-.5);
+  file = dues.slice(); total = file.length;
+  document.getElementById('info').textContent = libre ? 'Aucune carte à revoir aujourd\'hui : séance libre, pour le plaisir !' : total + ' carte(s) à revoir aujourd\'hui.';
+  montrer();
+  pousser(etat);   // ce qui a été fait hors connexion rejoint le calendrier partagé
+}
+function montrer(){
+  document.getElementById('prog').style.width = (100*faites/total) + '%';
+  if(!file.length) return fin();
+  const c = C[file[0]];
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' +
+    '<textarea id="ta" rows="2" placeholder="Ta réponse (tu peux aussi la dire à voix haute)…"></textarea>' +
+    '<button onclick="retourner()">🔄 Retourner la carte</button></div>';
+}
+function retourner(){
+  const c = C[file[0]], t = document.getElementById('ta').value.trim();
+  zone.innerHTML = '<div class="carte"><div class="recto">' + c.q + '</div>' + (t ? '<p class="ta">Ta réponse : ' + t.replace(/</g,'&lt;') + '</p>' : '') +
+    '<div class="verso">' + c.r + '</div><p><b>Alors, tu savais ?</b></p><div class="note">' +
+    '<button class="su" onclick="noter(\'su\')">😀 Su</button><button class="moitie" onclick="noter(\'moitie\')">😐 À moitié</button>' +
+    '<button class="pas" onclick="noter(\'pas\')">😕 Pas su</button></div></div>';
+  window._rep = t;
+}
+function noter(n){
+  const i = file.shift(), c = C[i]; bilan[n]++;
+  const e = etat[i] || {ecart: 0};
+  vues[i] = (vues[i] || 0) + 1;
+  const encore = vues[i] < 3;                                              // 3 passages max par séance : elle reviendra demain
+  if(n=='su'){ e.ecart = ECARTS.find(x => x > e.ecart) || 30; faites++; }  // 3 -> 7 -> 14 -> 30 jours
+  else if(n=='moitie'){ e.ecart = 3; if(encore) file.push(i); else faites++; }                     // revient en fin de séance
+  else { e.ecart = 1; if(encore) file.splice(Math.min(3, file.length), 0, i); else faites++; }     // revient 3 cartes plus loin
+  e.du = auj + e.ecart; e.t = Date.now(); etat[i] = e; sauver(); pousser({[i]: e});
+  envoyer({date:new Date().toISOString(),matiere:MATIERE,lecon:LECON,format:'flashcard',question:c.q.replace(/<[^>]+>/g,''),
+    reponse:window._rep||'(à voix haute)',bonne:c.r.replace(/<[^>]+>/g,''),correct:n=='su'?'oui':n=='moitie'?'à moitié':'non',notion:c.notion||''});
+  montrer();
+}
+function fin(){
+  zone.innerHTML = '<div class="carte" style="text-align:center"><p style="font-size:3em;margin:0">🎉</p><h2>Séance terminée !</h2>' +
+    '<p>😀 su du premier coup : ' + bilan.su + ' · 😐 à moitié : ' + bilan.moitie + ' · 😕 pas su : ' + bilan.pas + '</p>' +
+    '<p>Les cartes difficiles reviendront <b>demain</b>, les autres dans quelques jours. Reviens chaque jour : 5 minutes suffisent !</p>' +
+    '<button class="gris" onclick="if(confirm(\'Tout remettre à zéro, sur tous les appareils ?\'))remiseAZero()">Remettre à zéro</button></div>';
+}
+function remiseAZero(){
+  const t = Date.now(); etat = {}; C.forEach((c,i)=>etat[i] = {ecart: 0, du: 0, t: t}); sauver(); pousser(etat);
+  setTimeout(()=>location.reload(), 1500);
+}
+zone.innerHTML = '<div class="carte">⏳ Je récupère tes cartes…</div>';
+charger().then(demarrer);
+</script></body></html>
